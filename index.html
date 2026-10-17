@@ -2,65 +2,57 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>Семья Саджая</title>
 <style>
-:root{--bg:#fff7ec;--card:#fff;--ink:#3a2a1f;--mute:#8a7563;--line:#f0dfc8;--acc:#e8743b;--good:#3a9d5d;--bad:#d24b4b}
+:root{--acc:#e8743b;--ink:#3a2a1f;--mute:#8a7563;--line:#f0dfc8}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
-.wrap{max-width:980px;margin:0 auto;padding:16px}
-h1{font-size:34px;margin:8px 0 4px;text-align:center}
-h2{font-size:18px;margin:0 0 10px}
-.sub{color:var(--mute);text-align:center;max-width:640px;margin:0 auto 18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 2px 0 var(--line)}
-.chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.ch{cursor:pointer;transition:transform .15s}
-.ch:hover{transform:translateY(-3px)}
-.ch .em{font-size:44px}
-.ch b{font-size:19px}
-.ch small{display:block;color:var(--mute);margin-top:6px}
-.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px}
-.stat{display:flex;gap:14px;flex-wrap:wrap;font-weight:600}
-.bar{display:inline-block;width:70px;height:8px;background:var(--line);border-radius:5px;vertical-align:middle;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--acc)}
-.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:12px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
-.house{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-@media(max-width:480px){.house{grid-template-columns:repeat(2,1fr)}}
-.room{border:2px solid var(--line);border-radius:12px;padding:8px;cursor:pointer;background:#fffdf9;min-height:74px}
-.room.here{border-color:var(--acc);background:#fff1e6}
-.room .rn{font-size:13px;font-weight:700}
-.room .ppl{font-size:24px;letter-spacing:2px;margin-top:4px}
-.btns{display:flex;flex-wrap:wrap;gap:8px}
-button{font:inherit;border:0;border-radius:10px;padding:9px 12px;background:#ffe3cf;color:var(--ink);cursor:pointer}
-button:hover:not(:disabled){background:#ffd2b3}
-button:disabled{opacity:.45;cursor:default}
-button.main{background:var(--acc);color:#fff;font-weight:700}
-.fl{font-size:12px;font-weight:700;color:var(--mute);margin:8px 0 4px;text-transform:uppercase;letter-spacing:.05em}
-.scene{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:400/180;background:#eee}
-.scene svg{display:block;width:100%;height:100%}
-.actors{position:absolute;left:0;right:0;bottom:4%;display:flex;justify-content:center;gap:4%;font-size:clamp(26px,6vw,42px);filter:drop-shadow(0 3px 2px #0004)}
-.actors sup{font-size:11px;background:var(--acc);color:#fff;border-radius:6px;padding:0 4px;vertical-align:top}
-.say{background:#f7f1ff;border-radius:10px;padding:8px 10px;margin:6px 0;font-size:14px}
-.log{font-size:14px;max-height:220px;overflow:auto}
-.log div{padding:5px 0;border-bottom:1px dashed var(--line)}
-.log div:first-child{font-weight:600}
-.q div{margin:4px 0;font-size:15px}
-.done{color:var(--good);text-decoration:line-through}
-.rels{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:14px}
-.sec{margin-top:12px}
-.modal{position:fixed;inset:0;background:#0006;display:flex;align-items:center;justify-content:center;padding:16px;z-index:9}
-.modal .card{max-width:420px;width:100%;text-align:center}
-.modal .big{font-size:48px}
-.end p{margin:8px 0}
-.pop{animation:pop .3s}
-@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:none;opacity:1}}
+html,body{margin:0;height:100%;overflow:hidden;background:#bfe3f5;font:15px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);-webkit-user-select:none;user-select:none;color-scheme:light}
+#cv{position:fixed;inset:0;width:100%!important;height:100%!important;touch-action:none;display:block}
+.glass{background:rgba(255,250,243,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.8);box-shadow:0 8px 28px rgba(40,25,10,.18);border-radius:16px}
+#hud{position:fixed;top:10px;left:10px;right:10px;display:flex;gap:8px 14px;align-items:center;justify-content:space-between;padding:8px 12px;flex-wrap:wrap;z-index:3}
+#hud .st{display:flex;gap:12px;align-items:center;font-weight:700;flex-wrap:wrap}
+.bar{display:inline-block;width:60px;height:8px;background:#eadbc6;border-radius:5px;overflow:hidden;vertical-align:middle}.bar i{display:block;height:100%;background:var(--acc);transition:width .4s}
+#panel{position:fixed;left:10px;right:10px;bottom:10px;padding:10px 12px;max-height:38vh;overflow:auto;z-index:3}
+#panel h3{margin:0 0 8px;font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+button{font:inherit;border:0;border-radius:10px;padding:8px 11px;background:#ffe3cf;color:var(--ink);cursor:pointer}
+button:hover:not(:disabled){background:#ffd2b3}button:disabled{opacity:.45;cursor:default}
+button.main{background:var(--acc);color:#fff;font-weight:700}button.ic{padding:6px 9px;background:#fff}
+#toast{position:fixed;top:76px;left:50%;transform:translateX(-50%);max-width:min(560px,92vw);padding:10px 16px;text-align:center;font-weight:600;opacity:0;transition:opacity .35s;pointer-events:none;z-index:4}
+#ov:empty{display:none}
+#ov{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;z-index:9;overflow:auto}
+#ov.dim{background:rgba(30,20,15,.5)}
+#ov>.glass{max-width:720px;width:100%;padding:18px 18px 20px;max-height:94vh;overflow:auto}
+h1{margin:0;font-size:34px;text-align:center}
+.sub{color:var(--mute);text-align:center;margin:6px auto 14px;max-width:600px}
+.chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.ch{padding:12px;cursor:pointer;background:#fff;border-radius:14px;border:1px solid var(--line);transition:transform .15s}.ch:hover{transform:translateY(-3px)}
+.ch .em{font-size:38px}.ch small{display:block;color:var(--mute);margin-top:4px}
+.done{color:#3a9d5d;text-decoration:line-through}
+.log div{padding:4px 0;border-bottom:1px dashed var(--line);font-size:14px}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .35s;z-index:8}
+.hint{color:var(--mute);font-size:13px}
+.nm{position:fixed;left:0;top:0;transform:translate(-50%,0);font:600 12px system-ui,sans-serif;color:#fff;background:rgba(40,30,25,.55);padding:1px 7px;border-radius:9px;pointer-events:none;white-space:nowrap;z-index:2}
+.nm.me{background:var(--acc)}
+.bub{position:fixed;left:0;top:0;transform:translate(-50%,-100%);background:#fff;color:var(--ink);padding:6px 10px;border-radius:12px;max-width:210px;font-size:13px;line-height:1.25;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none;z-index:2;text-align:center}
+.bub:after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#fff}
+.bub.big{font-size:26px;padding:2px 8px;background:rgba(255,255,255,.95)}
+.rels{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
 </style>
 </head>
 <body>
-<div class="wrap" id="app"></div>
+<div id="hud" class="glass" style="display:none"></div>
+<div id="panel" class="glass" style="display:none"></div>
+<div id="toast" class="glass"></div>
+<div id="lbl"></div>
+<div id="fade"></div>
+<div id="ov"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const ROOMS={hall:['🚪','Прихожая',1],living:['🔥','Каминная',1],tv:['🎮','Кинотеатр',1],kitchen:['🍳','Кухня',1],dining:['🍽️','Столовая',1],study:['💼','Кабинет',1],yard:['🌳','Веранда и двор',1],boys:['🎧','Детская Тимура',2],girls:['🎀','Детская Евы и Мии',2],leor:['⚽','Детская Лео',2],bed:['🛏️','Спальня родителей',2],sroom:['👱‍♀️','Комната Сони',3],play:['🧩','Игровая зона',3]};
+const ROOMS={hall:['🚪','Прихожая',1],foyer:['✨','Холл',1],kitchen:['🍳','Кухня',1],dining:['🍽️','Столовая',1],study:['💼','Кабинет',1],living:['🔥','Каминная',1],tv:['🎮','Кинотеатр',1],yard:['🌳','Веранда',1],
+ boys:['🎧','Детская Тимура',2],girls:['🎀','Детская Евы и Мии',2],leor:['⚽','Детская Лео',2],bed:['🛏️','Спальня родителей',2],corr:['🚶','Коридор',2],
+ sroom:['👱‍♀️','Комната Сони',3],play:['🧩','Игровая зона',3],corr3:['🚶','Коридор',3]};
 const P={
  an:{n:'Анастасия',r:'Мама',e:'👩',fav:{kitchen:4,study:3,living:2,bed:2,girls:1},
   say:['Кто опять оставил носки в гостиной?','Давайте сначала уроки, потом гаджеты.','Как ты себя сейчас чувствуешь?','Я вас всех очень люблю. Но тишины хочу больше.','Ужин в девять, никто не опаздывает!']},
@@ -171,288 +163,344 @@ const EV=[
  {e:'🐦',t:'На подоконник сел смешной голубь.',c:[['Сфоткать и показать всем',{m:6,all:1}],['Покормить крошками',{m:4}]]},
  {e:'⚽',t:'Мяч улетел к соседу через забор!',c:[['Сходить извиниться и забрать',{e:-5,rel:{lev:5}}],['Отправить Лео',{m:3,rel:{leo:-3}}]]}
 ];
-// Комнаты нарисованы по фотографиям настоящего дома (без самих фото)
-const FLOOR='<rect y="135" width="400" height="45" fill="#f5f3ef"/><path d="M0 150H400M60 135L30 180M180 135L170 180M300 135L320 180" stroke="#e2ddd5"/>';
-const CHAND=(x,y,c)=>`<path d="M${x} 0V${y}" stroke="#999"/><path d="M${x-16} ${y+8}Q${x} ${y+20} ${x+16} ${y+8}" stroke="${c}" stroke-width="2" fill="none"/>${[-16,-8,0,8,16].map(d=>`<circle cx="${x+d}" cy="${y+8+(d?0:4)}" r="3" fill="#fff3c4" stroke="${c}"/>`).join('')}`;
-const SCENE={
- living:`<rect width="400" height="180" fill="#ebe6df"/>${FLOOR}<rect y="135" width="400" height="3" fill="#2d2b28"/>
- <path d="M0 135V50Q22 20 44 50V135Z M356 135V50Q378 20 400 50V135Z" fill="#d6cec3"/>
- ${[70,250].map(x=>`<rect x="${x}" y="10" width="80" height="125" fill="#e4edf2"/><rect x="${x}" y="10" width="80" height="125" fill="#fff" opacity=".55"/><rect x="${x-6}" y="8" width="14" height="128" fill="#cdb79a"/><rect x="${x+72}" y="8" width="14" height="128" fill="#cdb79a"/>`).join('')}
- <rect x="168" y="6" width="64" height="130" fill="#8c8170"/><path d="M175 20q20 15 5 30t20 30-10 30M205 15q-15 20 5 35t-5 40M222 30q-10 20 2 40" stroke="#d8ccb6" fill="none" stroke-width="2"/>
- <rect x="178" y="78" width="44" height="32" fill="#1e1e1e"/><path d="M188 110q0-16 12-23 12 7 12 23Z" fill="#ff9a3c"/><path d="M195 110q0-9 5-13 5 4 5 13Z" fill="#ffd36b"/>
- ${CHAND(110,35,'#c9b98f')}${CHAND(290,35,'#c9b98f')}
- <rect x="60" y="150" width="280" height="26" rx="4" fill="#cfcac4"/><rect x="100" y="112" width="210" height="20" rx="8" fill="#cbc5bd"/><rect x="95" y="126" width="220" height="24" rx="8" fill="#b9b2aa"/><rect x="280" y="126" width="55" height="40" rx="8" fill="#b9b2aa"/>
- <ellipse cx="160" cy="160" rx="22" ry="5" fill="#222" opacity=".8"/><path d="M150 162l5 12M170 162l-5 12" stroke="#c8a45a" stroke-width="2"/>`,
- tv:`<rect width="400" height="180" fill="#c7d1cc"/>${FLOOR}
- <rect x="0" y="10" width="120" height="125" fill="#43423f"/><path d="M5 40q30-20 50 10t60-5M5 70q30-20 50 10t60-5M5 100q30-20 50 10t60-5" stroke="#c8a45a" fill="none" stroke-width="1.5"/>
- <rect x="10" y="45" width="14" height="10" fill="#111"/><rect x="14" y="55" width="6" height="16" fill="#d4a94f"/><rect x="96" y="45" width="14" height="10" fill="#111"/><rect x="100" y="55" width="6" height="16" fill="#d4a94f"/>
- <rect x="20" y="108" width="90" height="34" rx="12" fill="#6f5c4d"/><rect x="14" y="100" width="102" height="16" rx="8" fill="#7d6a5a"/>
- <path d="M300 10H400V135H300Z" fill="#dfe8ee"/><rect x="300" y="10" width="100" height="125" fill="#fff" opacity=".4"/>${[296,340,384].map(x=>`<rect x="${x}" y="6" width="14" height="130" fill="#4c4749"/>`).join('')}
- <rect x="160" y="42" width="110" height="62" rx="2" fill="#141414"/><rect x="166" y="48" width="98" height="50" fill="#26344a"/><path d="M180 90l15-20 15 12 20-26 20 34Z" fill="#3e5a7e"/>
- <rect x="150" y="116" width="130" height="16" fill="#5a5a5a"/><rect x="200" y="110" width="26" height="6" rx="2" fill="#eee"/>`,
- girls:`<rect width="400" height="180" fill="#b8bcbf"/><rect y="128" width="400" height="52" fill="#b5763f"/><path d="M0 145H400M0 162H400M80 128V145M200 145V162M300 128V145M140 162V180" stroke="#9a6233"/>
- <rect x="0" y="0" width="240" height="108" fill="#2f5c88"/><rect x="0" y="0" width="28" height="108" fill="#fff"/><path d="M5 0V108M12 0V108M19 0V108" stroke="#222" stroke-width="3"/>
- ${[45,140].map(x=>`<rect x="${x}" y="18" width="70" height="80" fill="#f5f5f5"/>${[0,1,2,3,4,5,6,7,8,9].map(i=>`<path d="M${x} ${24+i*7}H${x+70}" stroke="#ddd"/>`).join('')}`).join('')}
- <rect x="0" y="100" width="245" height="8" fill="#fff"/><rect x="0" y="108" width="50" height="30" fill="#f2f2f2"/><circle cx="25" cy="123" r="7" fill="#2f5c88"/><rect x="130" y="108" width="34" height="26" fill="#f2f2f2"/><circle cx="147" cy="121" r="5" fill="#2f5c88"/>
- ${[[90,108],[200,104]].map(([x,y])=>`<rect x="${x}" y="${y-22}" width="22" height="24" rx="6" fill="#f0b8c2"/><rect x="${x-2}" y="${y}" width="26" height="8" rx="3" fill="#f0b8c2"/><path d="M${x+11} ${y+8}v14M${x} ${y+24}h22" stroke="#ddd" stroke-width="3"/>`).join('')}
- <rect x="245" y="132" width="155" height="40" fill="#efe9e4" opacity=".8"/>
- ${[270,340].map(x=>`<path d="M${x} 120A32 32 0 0 1 ${x+64} 120Z" fill="#e8b5bd"/>${[0,1,2,3,4].map(i=>`<path d="M${x+32} 120L${x+6+i*13} ${97+(i==2?-8:i%4?-4:6)}" stroke="#d79aa5"/>`).join('')}<rect x="${x-4}" y="118" width="72" height="26" rx="6" fill="#efc6cc"/><rect x="${x-4}" y="140" width="72" height="8" fill="#d79aa5"/>`).join('')}
- <circle cx="330" cy="50" r="12" fill="#fff"/><ellipse cx="324" cy="30" rx="4" ry="11" fill="#fff"/><ellipse cx="336" cy="30" rx="4" ry="11" fill="#fff"/><path d="M318 62q12 22 24 0Z" fill="#f4b6c6"/>${[0,1,2,3,4,5,6,7].map(i=>`<circle cx="${330+Math.cos(i*.8)*36}" cy="${50+Math.sin(i*.8)*30}" r="2.5" fill="#fff"/>`).join('')}`,
- hall:`<rect width="400" height="180" fill="#e3dbd1"/><rect y="132" width="400" height="48" fill="#f3efe9"/>${[0,1,2,3,4,5,6,7,8].map(i=>`<rect x="${40+i*40}" y="${150+(i%2)*14}" width="7" height="7" transform="rotate(45 ${43+i*40} ${153+(i%2)*14})" fill="#2a2a2a"/>`).join('')}
- <rect x="160" y="16" width="80" height="14" fill="#fffbe6" stroke="#ddd"/><rect x="160" y="34" width="80" height="100" fill="#fff" stroke="#ddd"/><rect x="164" y="40" width="12" height="60" rx="5" fill="#e3b54f"/><rect x="224" y="40" width="12" height="60" rx="5" fill="#e3b54f"/><circle cx="205" cy="90" r="3" fill="#c8a45a"/><circle cx="200" cy="70" r="14" fill="none" stroke="#eee"/>
- <path d="M200 0V40" stroke="#555"/>${[-18,-9,0,9,18].map(d=>`<path d="M${193+d} ${44+Math.abs(d)/3}h14l-3-10h-8Z" fill="#1d1d1d"/>`).join('')}
- <rect x="20" y="40" width="80" height="54" fill="#111"/><rect x="26" y="46" width="68" height="42" fill="#eee"/><path d="M40 80q5-25 15-20 0 10 10 20M60 80q5-25 15-20" stroke="#444" fill="none"/>
- <rect x="30" y="114" width="80" height="16" rx="4" fill="#1d1d1d"/><path d="M35 130l10 22M105 130l-10 22" stroke="#c8a45a" stroke-width="2"/>
- <path d="M310 40h50l8 10v60l-8 10h-50l-8-10V50Z" fill="#e7c87a"/><rect x="314" y="48" width="42" height="64" fill="#d9e2e6"/><rect x="290" y="118" width="100" height="16" fill="#151515"/><rect x="294" y="134" width="8" height="22" fill="#151515"/><rect x="378" y="134" width="8" height="22" fill="#151515"/>
- <ellipse cx="185" cy="140" rx="10" ry="3" fill="#333"/><ellipse cx="215" cy="141" rx="10" ry="3" fill="#e57fa0"/>`,
- boys:`<rect width="400" height="180" fill="#9fb9d3"/><rect y="132" width="400" height="48" fill="#b5763f"/><path d="M0 150H400M0 165H400" stroke="#9a6233"/>
- <rect x="150" y="20" width="80" height="80" fill="#e6f1f7" stroke="#fff" stroke-width="4"/><rect x="40" y="25" width="60" height="44" fill="#1d6b3a"/><circle cx="70" cy="47" r="10" fill="#fff"/><path d="M70 37v20M60 47h20" stroke="#222"/>
- <rect x="20" y="105" width="110" height="34" rx="6" fill="#2d4a6e"/><rect x="20" y="96" width="30" height="12" rx="4" fill="#fff"/><rect x="270" y="105" width="110" height="34" rx="6" fill="#3c3c3c"/><rect x="350" y="96" width="30" height="12" rx="4" fill="#fff"/>
- <circle cx="200" cy="150" r="12" fill="#fff" stroke="#222"/><path d="M194 146l6-4 6 4-2 7h-8Z" fill="#222"/><rect x="290" y="30" width="70" height="40" fill="#e3b54f"/><text x="325" y="56" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#222">GOAL!</text>`,
- bed:`<rect width="400" height="180" fill="#e7dfd6"/><rect y="132" width="400" height="48" fill="#cbb79f"/>
- <rect x="130" y="40" width="140" height="70" rx="10" fill="#cfc2b2"/><rect x="110" y="100" width="180" height="50" rx="8" fill="#fff"/><rect x="110" y="120" width="180" height="30" rx="6" fill="#d8cbbb"/><rect x="140" y="92" width="50" height="18" rx="8" fill="#f4efe9"/><rect x="210" y="92" width="50" height="18" rx="8" fill="#f4efe9"/>
- <rect x="70" y="105" width="34" height="30" fill="#8b7a68"/><rect x="296" y="105" width="34" height="30" fill="#8b7a68"/><path d="M80 105l7-20 7 20Z M306 105l7-20 7 20Z" fill="#fff3c4"/><rect x="300" y="96" width="14" height="9" rx="2" fill="#7a8f8a"/>`,
- yard:`<rect width="400" height="180" fill="#bfe3f5"/><circle cx="350" cy="35" r="18" fill="#ffd96b"/><rect y="120" width="400" height="60" fill="#86c066"/><rect x="0" y="40" width="130" height="85" fill="#efe8de"/><rect x="20" y="60" width="30" height="45" fill="#dbe9f1"/><rect x="80" y="60" width="30" height="45" fill="#dbe9f1"/>
- <rect x="170" y="80" width="10" height="45" fill="#7b5a3a"/><circle cx="175" cy="70" r="28" fill="#4f9a45"/><rect x="250" y="88" width="90" height="40" fill="none" stroke="#fff" stroke-width="4"/><path d="M250 88l10 10h70l10-10M260 98v30M330 98v30" stroke="#fff" opacity=".6"/>
- <rect x="200" y="122" width="34" height="10" fill="#333"/><path d="M204 132l-4 14M230 132l4 14" stroke="#333" stroke-width="2"/><path d="M207 118q3-8 0-14M217 118q3-8 0-14" stroke="#aaa" fill="none"/>`
-};
-// Комнаты по плану дома, фото которых пока нет
-SCENE.leor=SCENE.boys.replace(/<rect x="270".*?<rect x="350"[^>]*>/,"");
-SCENE.boys=`<rect width="400" height="180" fill="#5d6f7f"/><rect y="132" width="400" height="48" fill="#8a6a4c"/><path d="M0 150H400M0 165H400" stroke="#76583c"/>
- <rect x="160" y="18" width="80" height="78" fill="#cfe0ea" stroke="#eee" stroke-width="4"/><rect x="30" y="20" width="70" height="44" fill="#1a1a1a"/><text x="65" y="47" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#e3b54f">ECONOMY</text>
- <rect x="20" y="96" width="120" height="8" fill="#3a3a3a"/><rect x="28" y="104" width="6" height="34" fill="#3a3a3a"/><rect x="126" y="104" width="6" height="34" fill="#3a3a3a"/><rect x="50" y="76" width="44" height="20" rx="2" fill="#222"/><rect x="53" y="79" width="38" height="14" fill="#5ab0e0"/>
- <path d="M108 92a10 10 0 0 1 20 0" stroke="#e05a5a" stroke-width="3" fill="none"/><rect x="104" y="88" width="6" height="8" rx="2" fill="#e05a5a"/><rect x="126" y="88" width="6" height="8" rx="2" fill="#e05a5a"/>
- <rect x="260" y="104" width="130" height="34" rx="6" fill="#2b2f36"/><rect x="262" y="94" width="34" height="14" rx="4" fill="#ddd"/><rect x="300" y="28" width="70" height="46" fill="#e8e8e8"/><path d="M308 66l14-20 12 12 10-16 18 24Z" fill="#9db6c9"/>`;
-SCENE.dining=`<rect width="400" height="180" fill="#e9e3da"/><rect y="134" width="400" height="46" fill="#f4f1ec"/>${[60,250].map(x=>`<rect x="${x}" y="14" width="90" height="110" fill="#e4edf2"/><rect x="${x-6}" y="10" width="12" height="118" fill="#d2bfa3"/><rect x="${x+84}" y="10" width="12" height="118" fill="#d2bfa3"/>`).join('')}
- ${CHAND(200,30,'#c9b98f')}<rect x="90" y="108" width="220" height="10" rx="3" fill="#6b4a2e"/><rect x="100" y="118" width="8" height="40" fill="#5a3d24"/><rect x="292" y="118" width="8" height="40" fill="#5a3d24"/>
- ${[110,150,190,230,270].map(x=>`<rect x="${x}" y="84" width="22" height="30" rx="8" fill="#d8cbb8"/>`).join('')}<path d="M150 106h10M190 104h20M240 106h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="200" cy="100" r="5" fill="#e8743b"/>`;
-SCENE.study=`<rect width="400" height="180" fill="#4b5a52"/><rect y="134" width="400" height="46" fill="#7a5a3e"/><rect x="20" y="14" width="110" height="122" fill="#3a2c20"/>${[34,62,90,118].map(y=>`<rect x="24" y="${y}" width="102" height="3" fill="#2a1f16"/>${[0,1,2,3,4,5,6,7].map(i=>`<rect x="${28+i*12}" y="${y-18}" width="9" height="18" fill="${['#a33','#2a5d8a','#c9a35b','#3d7a4b'][i%4]}"/>`).join('')}`).join('')}
- <rect x="170" y="20" width="80" height="80" fill="#d9e6ec" stroke="#ddd" stroke-width="4"/><rect x="150" y="104" width="200" height="10" fill="#3a2c20"/><rect x="160" y="114" width="10" height="40" fill="#3a2c20"/><rect x="330" y="114" width="10" height="40" fill="#3a2c20"/>
- <rect x="230" y="82" width="44" height="22" rx="2" fill="#222"/><rect x="233" y="85" width="38" height="16" fill="#e9f2f7"/><circle cx="252" cy="93" r="4" fill="#e8743b"/><rect x="290" y="96" width="12" height="8" rx="2" fill="#fff"/><rect x="200" y="122" width="34" height="40" rx="8" fill="#2a2a2a"/>`;
-SCENE.sroom=`<rect width="400" height="180" fill="#ead7d0"/><path d="M0 0L60 40H340L400 0Z" fill="#dcc6be"/><rect y="132" width="400" height="48" fill="#c79a6e"/>
- <rect x="170" y="44" width="60" height="50" fill="#e6f0f5" stroke="#fff" stroke-width="4"/><rect x="30" y="100" width="140" height="40" rx="8" fill="#f6efe9"/><rect x="30" y="80" width="20" height="60" rx="4" fill="#b98b7a"/><rect x="60" y="92" width="40" height="14" rx="6" fill="#fff"/>
- <rect x="250" y="60" width="40" height="54" fill="#fff" stroke="#c79a6e"/><rect x="300" y="50" width="56" height="36" fill="#fff" stroke="#c79a6e"/><text x="328" y="72" font-size="9" text-anchor="middle" font-family="sans-serif" fill="#b46">Соня</text><rect x="270" y="112" width="100" height="22" fill="#a7745a"/>`;
-SCENE.play=`<rect width="400" height="180" fill="#fff4d6"/><path d="M0 0L80 50H320L400 0Z" fill="#ffe9b0"/><rect y="132" width="400" height="48" fill="#8ccbe0"/>${[0,1,2,3,4,5,6,7].map(i=>`<rect x="${i*50}" y="${132+(i%2)*24}" width="50" height="24" fill="${['#f7a1b5','#ffd36b','#9ed99a','#8ec5ff'][i%4]}" opacity=".7"/>`).join('')}
- <rect x="30" y="70" width="70" height="64" fill="#f7a1b5"/><path d="M30 70l35-30 35 30Z" fill="#e8743b"/><rect x="55" y="100" width="20" height="34" fill="#fff"/>
- <path d="M150 132V60H190" stroke="#3a9d5d" stroke-width="5" fill="none"/><path d="M190 60L250 132" stroke="#ffd36b" stroke-width="10"/><rect x="290" y="96" width="70" height="40" fill="none" stroke="#fff" stroke-width="4"/><circle cx="260" cy="150" r="10" fill="#fff" stroke="#222"/>
- ${[[120,150,'#e05a5a'],[200,154,'#5a8de0'],[330,150,'#3a9d5d']].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="14" height="14" fill="${c}"/>`).join('')}`;
-// Кухня-столовая: перспектива от входа, как на фото
-SCENE.kitchen=(()=>{
- const VX=200,VY=85,ZB=.818,D=z=>z/(z+1);
- const pt=(x,y,z)=>{const d=D(z);return [x+(VX-x)*d,y+(VY-y)*d]};
- const P=(x,y,z)=>pt(x,y,z).map(v=>v.toFixed(1)).join(',');
- const poly=(a,f,x='')=>`<polygon points="${a.map(v=>P(...v)).join(' ')}" fill="${f}" ${x}/>`;
- const line=(a,b,c,w=.6)=>`<line x1="${pt(...a)[0]}" y1="${pt(...a)[1]}" x2="${pt(...b)[0]}" y2="${pt(...b)[1]}" stroke="${c}" stroke-width="${w}"/>`;
- const wallQ=(x,y1,y2,z1,z2,f,e='')=>poly([[x,y1,z1],[x,y1,z2],[x,y2,z2],[x,y2,z1]],f,e);
- const flatQ=(x1,x2,y,z1,z2,f,e='')=>poly([[x1,y,z1],[x2,y,z1],[x2,y,z2],[x1,y,z2]],f,e);
- const GOLD='#c9a35b';
- let o=`<defs>
- <linearGradient id="kFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#faf9f6"/><stop offset="1" stop-color="#e7e3dc"/></linearGradient>
- <linearGradient id="kWl" x1="0" x2="1"><stop offset="0" stop-color="#e4e0d9"/><stop offset="1" stop-color="#efece7"/></linearGradient>
- <linearGradient id="kWr" x1="1" x2="0"><stop offset="0" stop-color="#e2ded7"/><stop offset="1" stop-color="#eeebe6"/></linearGradient>
- <linearGradient id="kCl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f5f2"/><stop offset="1" stop-color="#ebe9e5"/></linearGradient>
- <linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe3ef"/><stop offset=".7" stop-color="#eef5f8"/><stop offset="1" stop-color="#f7f2e6"/></linearGradient>
- <linearGradient id="kTeal" x1="0" x2="1"><stop offset="0" stop-color="#2f6d68"/><stop offset=".35" stop-color="#4f9690"/><stop offset=".6" stop-color="#3a7f79"/><stop offset="1" stop-color="#2a625d"/></linearGradient>
- <linearGradient id="kVel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa49a"/><stop offset=".55" stop-color="#3c837a"/><stop offset="1" stop-color="#2a6159"/></linearGradient>
- <linearGradient id="kRef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
- <linearGradient id="kBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff8e0" stop-opacity=".5"/><stop offset="1" stop-color="#fff8e0" stop-opacity="0"/></linearGradient>
- <linearGradient id="kWood" x1="0" x2="1"><stop offset="0" stop-color="#8a6236"/><stop offset=".45" stop-color="#c4955c"/><stop offset="1" stop-color="#7a552e"/></linearGradient>
- <radialGradient id="kTop" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9e7e3"/></radialGradient>
- <radialGradient id="kGlow"><stop offset="0" stop-color="#fff6d0"/><stop offset=".4" stop-color="#fff2c0" stop-opacity=".6"/><stop offset="1" stop-color="#fff2c0" stop-opacity="0"/></radialGradient>
- <radialGradient id="kVig" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3a2a1f" stop-opacity=".22"/></radialGradient>
- <filter id="kBl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2"/></filter>
- <clipPath id="kTc"><ellipse cx="200" cy="111.5" rx="38" ry="9"/></clipPath>
- </defs>`;
- // потолок, пол, стены
- o+=poly([[0,0,0],[400,0,0],[400,0,ZB],[0,0,ZB]],'url(#kCl)');
- o+=poly([[0,180,0],[400,180,0],[400,180,ZB],[0,180,ZB]],'url(#kFl)');
- o+=poly([[70,180,.1],[330,180,.1],[330,180,.72],[70,180,.72]],'#2b2a28');
- o+=poly([[80,180,.13],[320,180,.13],[320,180,.67],[80,180,.67]],'url(#kFl)');
- o+=poly([[84,180,.14],[316,180,.14],[316,180,.65],[84,180,.65]],'none',`stroke="${GOLD}" stroke-width=".5"`);
- for(let x=-300;x<=700;x+=100)o+=line([x,180,0],[x,180,ZB],'#d9d4cc',.4);
- [.08,.2,.34,.5,.7].forEach(z=>o+=line([0,180,z],[400,180,z],'#ddd8d0',.4));
- // отражения окон и луч света на полу
- o+=`<polygon points="120,137 181,137 186,178 104,178" fill="url(#kRef)" opacity=".55"/><polygon points="219,137 280,137 296,178 214,178" fill="url(#kRef)" opacity=".55"/>`;
- o+=poly([[0,0,ZB],[0,180,ZB],[0,180,0],[0,0,0]],'url(#kWl)')+poly([[400,0,ZB],[400,180,ZB],[400,180,0],[400,0,0]],'url(#kWr)');
- o+=wallQ(0,0,6,0,ZB,'#f2f0ec')+wallQ(400,0,6,0,ZB,'#f2f0ec');
- // задняя стена с окнами (рисуем в масштабе)
- const k=1-D(ZB),bx=200-200*k,by=VY-VY*k;
- o+=`<g transform="translate(${bx.toFixed(1)},${by.toFixed(1)}) scale(${k.toFixed(3)})">
- <rect width="400" height="180" fill="#eceae5"/><rect y="176" width="400" height="4" fill="#d9d4cc"/>
- ${[52,232].map(x=>`<rect x="${x}" y="16" width="116" height="152" fill="url(#kSky)"/><path d="M${x+58} 16V168M${x} 56H${x+116}" stroke="#fff" stroke-width="4"/><rect x="${x}" y="16" width="116" height="152" fill="none" stroke="#fff" stroke-width="5"/>
- <path d="M${x+8} 30q8 40 0 80t6 58M${x+30} 26q-6 50 2 90t-2 52M${x+80} 28q6 45-2 85t4 55M${x+104} 26q-8 50 0 92" stroke="#c9d6dd" stroke-width="2" fill="none" opacity=".7"/>`).join('')}
- <rect x="40" y="6" width="320" height="168" fill="#fff" opacity=".42"/>
- <path d="M60 6v168M90 6v168M120 6v168M150 6v168M250 6v168M280 6v168M310 6v168M340 6v168" stroke="#fff" stroke-width="3" opacity=".5"/>
- <rect x="0" y="0" width="400" height="7" fill="#d9d5cf"/><rect x="14" y="7" width="40" height="171" fill="url(#kTeal)"/><rect x="346" y="7" width="40" height="171" fill="url(#kTeal)"/>
- <path d="M24 7v171M34 7v171M44 7v171M356 7v171M366 7v171M376 7v171" stroke="#22524e" stroke-width="1.5" opacity=".6"/>
- <rect x="194" y="70" width="12" height="22" rx="2" fill="#f4f1ea" stroke="#ddd"/><circle cx="200" cy="66" r="10" fill="url(#kGlow)"/>
- </g>`;
- o+=`<polygon points="120,40 181,40 205,170 98,170" fill="url(#kBeam)" opacity=".5"/><polygon points="219,40 280,40 305,170 200,170" fill="url(#kBeam)" opacity=".4"/>`;
- // встроенные светильники
- [[120,.15],[280,.15],[120,.45],[280,.45],[200,.3]].forEach(([x,z])=>{const[a,b]=pt(x,0,z);o+=`<ellipse cx="${a}" cy="${b+.8}" rx="${3.4*(1-D(z))}" ry="${1.1*(1-D(z))}" fill="#fffbe8" stroke="#ddd" stroke-width=".3"/>`});
- // левая стена: верхние шкафы, фартук, столешница, нижние шкафы
- o+=wallQ(0,66,104,0,ZB,'#efede8')+`<path d="M${P(0,74,.05).replace(',',' ')}L${P(0,98,.5).replace(',',' ')}M${P(0,70,.3).replace(',',' ')}L${P(0,100,.7).replace(',',' ')}" stroke="#d6d1c9" stroke-width=".7" fill="none"/>`;
- o+=flatQ(0,22,66,0,ZB,'#e4e0d8')+wallQ(22,4,66,0,ZB,'#fbfaf8');
- [.1,.22,.36,.52,.7].forEach(z=>o+=line([22,4,z],[22,66,z],'#ddd3bf',.7));
- for(let i=0;i<14;i++){const z=.02+i*.057;o+=line([22,8,z],[22,62,z],'#efebe4',.5)}
- o+=line([22,66,0],[22,66,ZB],GOLD,1.2)+line([22,4,0],[22,4,ZB],GOLD,.8);
- o+=flatQ(0,32,104,0,ZB,'#ece9e3')+wallQ(32,104,108,0,ZB,'#ddd8cf')+wallQ(32,108,174,0,ZB,'#fbfaf8')+wallQ(32,174,180,0,ZB,'#d8d2c8');
- [.12,.26,.42,.6].forEach(z=>o+=line([32,108,z],[32,174,z],'#ddd3bf',.7));
- o+=line([32,108,0],[32,108,ZB],GOLD,1.2);
- o+=flatQ(8,26,104.2,.22,.34,'#c7cbcf')+line([4,104,.28],[4,90,.28],'#9aa0a6',1.6)+line([4,90,.28],[12,92,.28],'#9aa0a6',1.6);
- {const[a,b]=pt(10,104,.62);o+=`<rect x="${a-5}" y="${b-8}" width="10" height="8" rx="2" fill="#f0ece6" stroke="#ccc" stroke-width=".4"/><rect x="${a+7}" y="${b-10}" width="5" height="10" rx="1.5" fill="#4a4a4a"/>`}
- // правая стена: высокая колонна с духовкой, столешница
- o+=wallQ(400,66,104,.24,ZB,'#efede8')+flatQ(380,400,62,.24,ZB,'#e4e0d8')+wallQ(380,4,62,.24,ZB,'#fbfaf8')+line([380,62,.24],[380,62,ZB],GOLD,1.2);
- o+=flatQ(368,400,104,.24,ZB,'#ece9e3')+wallQ(368,104,108,.24,ZB,'#ddd8cf')+wallQ(368,108,174,.24,ZB,'#fbfaf8')+wallQ(368,174,180,.24,ZB,'#d8d2c8');
- [.36,.5,.66].forEach(z=>o+=line([368,108,z],[368,174,z],'#ddd3bf',.7)+line([380,4,z],[380,62,z],'#ddd3bf',.7));
- o+=line([368,108,.24],[368,108,ZB],GOLD,1.2);
- o+=wallQ(376,4,176,0,.24,'#fbfaf8')+flatQ(376,400,4,0,.24,'#f3f1ec')+line([376,4,.24],[376,176,.24],GOLD,1)+line([376,4,.12],[376,176,.12],'#ddd3bf',.7);
- o+=wallQ(376,70,108,.04,.2,'#2c2d2f')+wallQ(376,74,92,.06,.18,'#3d4a55')+line([376,96,.06],[376,96,.18],'#888',1.2);
- {const[a,b]=pt(388,104,.5);o+=`<path d="M${a-5} ${b}q5-9 10 0Z" fill="#e8e3da"/><ellipse cx="${a}" cy="${b}" rx="5" ry="1" fill="#ccc"/>`}
- // стулья
- const chair=(x,y,s,show)=>`<g transform="translate(${x} ${y}) scale(${s})">
-  <ellipse cx="0" cy="25" rx="17" ry="3" fill="#000" opacity=".16" filter="url(#kBl)"/>
-  <path d="M-10 2L-13 24M10 2L13 24M-7 3L-8 20M7 3L8 20" stroke="${GOLD}" stroke-width="1.4" stroke-linecap="round"/>
-  ${show?'<ellipse cx="0" cy="1" rx="14" ry="4.5" fill="#2f6e66"/>':''}
-  <path d="M-15 2C-17 -20 -11 -29 0 -29C11 -29 17 -20 15 2C9 6 -9 6 -15 2Z" fill="url(#kVel)"/>
-  <path d="M-9 -2C-10 -16 -7 -24 -3 -26M-3 0C-3.5 -14 -2 -24 0 -27M3 0C3.5 -14 2 -24 0 -27M9 -2C10 -16 7 -24 3 -26" stroke="#26584f" stroke-width=".8" fill="none" opacity=".7"/>
-  <path d="M-13 -12C-12 -24 -6 -28 0 -28" stroke="#fff" stroke-width="1.4" fill="none" opacity=".25" stroke-linecap="round"/>
- </g>`;
- o+=chair(176,118,.6,0)+chair(224,118,.6,0);
- // стол: мраморная столешница на деревянной ножке
- o+=`<ellipse cx="200" cy="151" rx="30" ry="4" fill="#000" opacity=".18" filter="url(#kBl)"/>
- <path d="M192 115L188 150Q200 153 212 150L208 115Z" fill="url(#kWood)"/>
- <path d="M194 116v34M197 116v35M200 116v35M203 116v35M206 116v34" stroke="#6b4a26" stroke-width=".5" opacity=".6"/>
- <ellipse cx="200" cy="114" rx="38" ry="9" fill="#d3cec6"/>
- <ellipse cx="200" cy="111.5" rx="38" ry="9" fill="url(#kTop)"/>
- <g clip-path="url(#kTc)" fill="none" stroke-linecap="round"><path d="M165 108q12 4 20 1t18 4 22-2M180 116q10-5 22-2t26-3M210 104q4 6 14 7M172 112q6-1 10 3" stroke="#a9a9a9" stroke-width=".6"/><path d="M190 110q8 3 16 0" stroke="#c4c4c4" stroke-width="1.2" opacity=".6"/></g>
- <ellipse cx="190" cy="108" rx="14" ry="2.5" fill="#fff" opacity=".7"/>
- <ellipse cx="207" cy="111" rx="5" ry="1.6" fill="#f2efe9" stroke="#d6d0c6" stroke-width=".4"/><ellipse cx="207" cy="110.8" rx="3.6" ry="1" fill="#d39a3c"/>`;
- o+=chair(170,139,.82,1)+chair(232,139,.82,1);
- // люстра
- o+=`<path d="M200 26V44" stroke="#9aa0a6" stroke-width=".8"/><circle cx="200" cy="48" r="20" fill="url(#kGlow)" opacity=".8"/>
- <ellipse cx="200" cy="50" rx="15" ry="3" fill="none" stroke="#b9bec4" stroke-width="1.2"/><path d="M200 44v9" stroke="#b9bec4" stroke-width="2"/>
- ${[-15,-10,-5,0,5,10,15].map(d=>{const y=50+(Math.abs(d)<8?2:0);return `<path d="M${200+d} ${y}v-6" stroke="#cfd3d8" stroke-width="1.2"/><circle cx="${200+d}" cy="${y-7}" r="1.6" fill="#fffbe6"/><circle cx="${200+d}" cy="${y-7}" r="4" fill="url(#kGlow)"/>`}).join('')}`;
- o+=`<rect width="400" height="180" fill="url(#kVig)"/>`;
- return o;
-})();
-let S;
-const $=s=>document.querySelector(s);
-const rnd=a=>a[Math.floor(Math.random()*a.length)];
-const clamp=v=>Math.max(0,Math.min(100,v));
+// ================= ВНЕШНОСТЬ =================
+const LOOK={an:{hair:'#3b2418',st:'long',top:'#e86a92',bot:'#e86a92',s:1,dress:1},
+ lev:{hair:'#1f1a17',st:'beard',top:'#3b7dd8',bot:'#2e3440',s:1.07},
+ so:{hair:'#d9b06a',st:'long',top:'#f4c7a8',bot:'#4e5f80',s:.97},
+ ti:{hair:'#2a1d15',st:'short',top:'#2b2b2b',bot:'#39465c',s:.95},
+ ev:{hair:'#5a3a26',st:'pony',top:'#a78bfa',bot:'#6d5bd0',s:.8},
+ mi:{hair:'#7a5232',st:'pig',top:'#ff8fb1',bot:'#ff8fb1',s:.68,dress:1},
+ leo:{hair:'#2a1d15',st:'short',top:'#e23b3b',bot:'#1f3a7a',s:.74}};
+// ================= ПЛАН ДОМА (по экспликации) =================
+const OX=1,OY=2;
+const FL={
+1:{w:44,h:33,R:{hall:[[1,12,11,6]],foyer:[[13,11,8,7]],kitchen:[[13,3,8,7]],study:[[13,19,8,6]],dining:[[22,2,7,8],['c',25.5,2,3.5]],living:[[22,11,8,7],['c',30,14.5,3.5]],tv:[[22,19,7,7],['c',25.5,26,3.5]],yard:[['r',30,14.5,4.6,10.5]],s1:[[6,19,6,5]]},
+ D:[[8,18,2,1],[12,14,1,2],[16,10,2,1],[16,18,2,1],[21,5,1,2],[24,10,2,1],[21,13,1,3],[24,18,2,1],[32,10,1,2],[32,17,1,2]],X:[[6,4,7,7]]},
+2:{w:34,h:33,R:{boys:[[6,8,5,11],['c',6,13.5,5]],girls:[[13,3,8,8]],leor:[[22,2,7,9],['c',25.5,2,3.5]],corr:[[12,12,17,3],[12,15,4,5],[22,15,6,3]],bed:[[19,19,10,7],['c',24,26,4]],s2:[[6,21,9,4]]},
+ D:[[11,13,1,1],[16,11,2,1],[24,11,2,1],[12,20,3,1],[24,18,2,1]],X:[[6,3,6,4]]},
+3:{w:40,h:29,R:{play:[[6,10,6,10],['c',6,15,5.5]],corr3:[[13,13,10,3]],sroom:[[24,10,8,9],['c',32,14.5,4.5]],s3:[[7,21,6,4]]},
+ D:[[12,14,1,1],[23,14,1,1],[8,20,2,1]],X:[[13,3,10,9],[13,17,10,9]]}};
+const FURN={
+1:[['entry',.55,14,.45,2],['rug',3,14,6,3,'#d8cdbd'],['bench',2,12.15,3,.6],['console',7.5,12.1,3,.55],['mirror',8,12,2,.05],['lamp',6,15],['plant',11.4,17.4],
+ ['counter',13,3,.85,7],['counter',13.85,3,2.4,.85],['counter',19,3,2,.85],['window',16.7,3,1.9,.06],['curtain',16.3,3,.4,.06,'#3f8a85'],['curtain',18.6,3,.4,.06,'#3f8a85'],['frame',14.6,4.6,5.4,4.6],['rtable',17.3,6.8,1.05],['lamp',17.3,6.8],
+ ['ltable',23.5,4.6,4,1.4],['lamp',25.5,5.3],['plant',22.6,9.3],['plant',28.4,9.3],
+ ['rug',15,12.6,4,4,'#e3d9c9'],['lamp',17,14.5],['plant',13.6,11.6],['plant',20.4,17.4],
+ ['rug',23.3,12,6,5.4,'#cfcac4'],['sofa',23.6,12.3,1,4.6,'#bdb6ae','w'],['sofa',24.6,12.3,3.5,1,'#bdb6ae','n'],['ctable',27,15,.55],['fire',32.6,13.6,.8,1.8],['lamp',26,13.8],['lamp',28.6,15.6],['plant',22.6,17.3],
+ ['wallart',22,19,7,.06,'#43423f'],['sofa',23.4,21.2,4.2,1.1,'#6f5c4d','n'],['screen',23.4,28.3,4.2,.06],['ps',25,27.9,1,.3],['seat',22.8,24,.35,'#5a4a3e'],['plant',28.3,19.8],['lamp',25.5,24],
+ ['shelf',13.05,19.1,.7,5.8],['desk',15.5,19.4,4,.9,'#5a4330'],['laptop',17.2,19.5],['seat',17.5,20.9,.32,'#2a2a2a'],['plant',20.4,24.4],['rug',15,21.8,5,2.6,'#8e7a66'],['lamp',17.5,22],
+ ['bbq',36,7.6,1,1],['goal',39.3,13.3,.9,2.4],['lounge',35.2,20.6,1.9,.8],['lounge',33.6,22.6,1.9,.8],['seat',37.5,11,.45,'#ffffff'],['plant',33.2,6],['plant',38.2,19.5],['ball',37.8,14.5]],
+2:[['bed',8.6,8.4,2.2,3,'#2b2f36'],['desk',6.2,17.4,3.4,.8,'#3a3a3a'],['laptop',7.4,17.45],['seat',8,16.6,.32,'#e05a5a'],['rug',3,12,4,3,'#4b5563'],['deco',4,9.8,.6,'🎧'],['lamp',6,13.5],
+ ['curtain',13,3,8,.06,'#2f5c88'],['desk',13.05,3.6,.8,6,'#fafafa'],['seat',14.3,5,.3,'#f0b8c2'],['seat',14.3,8,.3,'#f0b8c2'],['rug',15.5,6.6,5,3,'#f1ece8'],['shell',16,3.1,1.9,2.9],['shell',18.6,3.1,1.9,2.9],['deco',18.3,3.3,.5,'🐰'],['deco',20.3,10.3,.5,'📱'],['lamp',17,7],
+ ['rug',23,6,5,3.5,'#5aa64a'],['bed',22.3,2.6,1.7,2.9,'#2d4a6e'],['goal',27.8,6.3,.7,2.2],['ball',25.5,7.7],['deco',27,3,.6,'🏆'],['lamp',25.5,6],
+ ['rug',21.3,23.6,5.4,2.8,'#d8cbbb'],['bigbed',22.5,19.3,3,3.4,'#ffffff'],['stand',21.7,19.4],['stand',25.7,19.4],['plant',19.6,25.3],['lamp',24,24.5],
+ ['rug',13,13,15,1,'#9b4a3c'],['lamp',20,13.5]],
+3:[['house',2.3,12,2,2.2],['slide',9.8,11,1,2.6],['seat',4,18,.45,'#f7a1b5'],['seat',9,18.5,.45,'#8ec5ff'],['ball',7,15],['deco',5,15.5,.6,'🧸'],['deco',10.5,16,.6,'🪀'],['lamp',6,15],
+ ['bed',29.5,10.4,2.2,3,'#efc6cc'],['desk',24.2,10.2,3,.8,'#ffffff'],['laptop',25,10.25],['rug',27,14,5,3,'#e8cfc7'],['plant',35.5,14.5],['deco',33.5,12,.6,'🧳'],['stand',28.7,10.5],['lamp',28,15],
+ ['rug',13.3,13.9,9.4,1.2,'#9b4a3c']]};
+const STYLE={kitchen:'marble',dining:'marble',foyer:'marble',living:'marble',tv:'marble',hall:'diamond',yard:'deck',play:'mats',s1:'stairs',s2:'stairs',s3:'stairs'};
+const SOLID=new Set(['bench','console','counter','rtable','ltable','sofa','fire','shelf','desk','bed','shell','bigbed','stand','house','slide','bbq','lounge']);
+const inS=(s,x,y)=>{if(s[0]==='b')return x>=s[1]&&x<s[1]+s[3]&&y>=s[2]&&y<s[2]+s[4];const d=Math.hypot(x-s[1],y-s[2]);return s[0]==='c'?d<=s[3]:x>=s[1]&&d>=s[3]&&d<=s[4]};
+const STAIR={},RT={};
+for(const f of [1,2,3]){const F=FL[f];
+ const sh=s=>typeof s[0]==='number'?['b',s[0]+OX,s[1]+OY,s[2],s[3]]:s[0]==='c'?['c',s[1]+OX,s[2]+OY,s[3]]:['r',s[1]+OX,s[2]+OY,s[3],s[4]];
+ F.S={};for(const k in F.R)F.S[k]=F.R[k].map(sh);
+ const s4=d=>[d[0]+OX,d[1]+OY,d[2],d[3]];F.D=F.D.map(s4);F.X=F.X.map(s4);
+ F.I=FURN[f].map(it=>{const a=it.slice();a[1]+=OX;a[2]+=OY;return a});
+ F.g=[];F.b=[];
+ for(let y=0;y<F.h;y++){const gr=[],br=[];for(let x=0;x<F.w;x++){let r=null;for(const k in F.S)if(F.S[k].some(s=>inS(s,x+.5,y+.5)))r=k;
+  if(!r)for(const d of F.D)if(x>=d[0]&&x<d[0]+d[2]&&y>=d[1]&&y<d[1]+d[3])r='door';gr.push(r);br.push(0)}F.g.push(gr);F.b.push(br)}
+ for(const it of F.I)if(SOLID.has(it[0])){const[t,x,y,w,h]=it,r=t==='rtable'?[x-w,y-w,2*w,2*w]:[x,y,w,h];
+  for(let ty=Math.floor(r[1]-1);ty<r[1]+r[3]+1;ty++)for(let tx=Math.floor(r[0]-1);tx<r[0]+r[2]+1;tx++)if(F.b[ty]&&tx+.5>r[0]-.2&&tx+.5<r[0]+r[2]+.2&&ty+.5>r[1]-.2&&ty+.5<r[1]+r[3]+.2)F.b[ty][tx]=1}
+ for(const k in F.S)if(/^s\d$/.test(k)){const s=F.S[k][0];STAIR[f]=[s[1]+s[3]/2,s[2]+s[4]/2]}
+ for(let y=0;y<F.h;y++)for(let x=0;x<F.w;x++){const k=F.g[y][x];if(k&&ROOMS[k]&&!F.b[y][x])(RT[k]=RT[k]||[]).push([x+.5,y+.5])}
+}
+const pass=(f,x,y)=>{const F=FL[f];return x>=0&&y>=0&&x<F.w&&y<F.h&&!!F.g[y][x]&&!F.b[y][x]};
+const DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+function bfs(f,sx,sy,tx,ty){const F=FL[f],W=F.w;sx|=0;sy|=0;tx|=0;ty|=0;if(!pass(f,tx,ty))return null;const prev=new Int32Array(W*F.h).fill(-1),s=sy*W+sx,t=ty*W+tx,q=[s];prev[s]=s;
+ for(let h=0;h<q.length;h++){const c=q[h];if(c===t)break;const cx=c%W,cy=(c/W)|0;for(const[dx,dy]of DIRS){const nx=cx+dx,ny=cy+dy;if(!pass(f,nx,ny))continue;const n=ny*W+nx;if(prev[n]!==-1)continue;if(dx&&dy&&(!pass(f,cx+dx,cy)||!pass(f,cx,cy+dy)))continue;prev[n]=c;q.push(n)}}
+ if(prev[t]===-1)return null;const p=[];for(let c=t;c!==s;c=prev[c])p.push([c%W+.5,((c/W)|0)+.5]);return p.reverse()}
+const roomAt=(f,x,y)=>{const r=FL[f].g[y|0]?.[x|0];return r};
+// ================= THREE =================
+let seed=7;const sr=()=>(seed=seed*16807%2147483647)/2147483647;
+const R3=new THREE.WebGLRenderer({antialias:true});R3.setPixelRatio(Math.min(devicePixelRatio,2));R3.shadowMap.enabled=true;R3.shadowMap.type=THREE.PCFSoftShadowMap;
+R3.outputEncoding=THREE.sRGBEncoding;R3.toneMapping=THREE.ACESFilmicToneMapping;R3.toneMappingExposure=1.05;R3.domElement.id='cv';document.body.prepend(R3.domElement);
+const SC=new THREE.Scene(),CAM=new THREE.PerspectiveCamera(40,1,.1,400);SC.background=new THREE.Color('#bfe3f5');SC.fog=new THREE.Fog('#bfe3f5',60,140);
+const HEMI=new THREE.HemisphereLight(0xfff4e6,0x8a7a6a,.65),SUN=new THREE.DirectionalLight(0xffffff,1.15);
+SUN.position.set(42,40,30);SUN.target.position.set(22,0,16);SUN.castShadow=true;SUN.shadow.mapSize.set(2048,2048);
+Object.assign(SUN.shadow.camera,{left:-32,right:32,top:32,bottom:-32,near:1,far:140});SUN.shadow.bias=-.0004;SUN.shadow.normalBias=.03;
+SC.add(HEMI,SUN,SUN.target);
+function tex(draw,rep){const c=document.createElement('canvas');c.width=c.height=256;const g=c.getContext('2d');draw(g);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.anisotropy=8;t.encoding=THREE.sRGBEncoding;if(rep)t.repeat.set(rep,rep);return t}
+function veins(g,n){g.strokeStyle='rgba(150,140,128,.28)';for(let i=0;i<n;i++){g.lineWidth=.6+sr()*1.6;g.beginPath();let x=sr()*256,y=sr()*256;g.moveTo(x,y);for(let j=0;j<4;j++){x+=(sr()-.3)*90;y+=(sr()-.5)*70;g.quadraticCurveTo(x-30,y+20*sr(),x,y)}g.stroke()}}
+const TX={
+ marble:tex(g=>{g.fillStyle='#f4f1eb';g.fillRect(0,0,256,256);veins(g,5);g.strokeStyle='#dcd5ca';g.lineWidth=3;g.strokeRect(0,0,256,256)}),
+ diamond:tex(g=>{g.fillStyle='#f6f3ee';g.fillRect(0,0,256,256);veins(g,3);g.fillStyle='#262626';for(const[x,y]of[[0,0],[256,0],[0,256],[256,256]]){g.beginPath();g.moveTo(x-28,y);g.lineTo(x,y-28);g.lineTo(x+28,y);g.lineTo(x,y+28);g.fill()}g.strokeStyle='#ddd5c9';g.lineWidth=2;g.strokeRect(0,0,256,256)}),
+ wood:tex(g=>{for(let i=0;i<6;i++){const y=i*42.7;g.fillStyle=['#c38b57','#cc955f','#bb8350','#c99260'][i%4];g.fillRect(0,y,256,43);g.strokeStyle='rgba(90,55,25,.18)';g.lineWidth=1;for(let k=0;k<6;k++){g.beginPath();g.moveTo(0,y+5+k*6+sr()*3);g.bezierCurveTo(80,y+sr()*40,170,y+sr()*40,256,y+5+k*6);g.stroke()}g.fillStyle='rgba(70,40,15,.35)';g.fillRect(0,y,256,2);g.fillRect((i*97)%256,y,2,43)}}),
+ deck:tex(g=>{for(let i=0;i<5;i++){g.fillStyle=['#a5764f','#9c6e48','#ad7d54'][i%3];g.fillRect(i*51.2,0,51,256);g.fillStyle='rgba(40,25,10,.4)';g.fillRect(i*51.2,0,3,256)}}),
+ stairs:tex(g=>{g.fillStyle='#d9cdbd';g.fillRect(0,0,256,256);g.fillStyle='#b9a994';for(let y=0;y<256;y+=64)g.fillRect(0,y,256,8)}),
+ plain:tex(g=>{g.fillStyle='#fff';g.fillRect(0,0,256,256);g.strokeStyle='rgba(0,0,0,.08)';g.lineWidth=6;g.strokeRect(0,0,256,256)}),
+ grass:tex(g=>{g.fillStyle='#86bd63';g.fillRect(0,0,256,256);for(let i=0;i<2600;i++){g.fillStyle=sr()<.5?'rgba(255,255,230,.10)':'rgba(30,80,20,.12)';g.fillRect(sr()*256,sr()*256,2,5)}},70)};
+const MAT={};
+const lin=c=>new THREE.Color(c).convertSRGBToLinear();
+const mat=(c,o)=>{const k=c+JSON.stringify(o||{});if(MAT[k])return MAT[k];const q=Object.assign({roughness:.75},o||{});if(q.emissive)q.emissive=lin(q.emissive);return MAT[k]=new THREE.MeshStandardMaterial(Object.assign(q,{color:lin(c)}))};
+const FMAT={marble:new THREE.MeshStandardMaterial({map:TX.marble,roughness:.22,metalness:.05}),diamond:new THREE.MeshStandardMaterial({map:TX.diamond,roughness:.22}),
+ wood:new THREE.MeshStandardMaterial({map:TX.wood,roughness:.55}),door:new THREE.MeshStandardMaterial({map:TX.wood,roughness:.55}),deck:new THREE.MeshStandardMaterial({map:TX.deck,roughness:.8}),
+ stairs:new THREE.MeshStandardMaterial({map:TX.stairs,roughness:.6}),mats:new THREE.MeshStandardMaterial({map:TX.plain,roughness:.9})};
+const GOLD=mat('#c9a35b',{metalness:.7,roughness:.3}),CHROME=mat('#d6d9dd',{metalness:.85,roughness:.2});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(400,400),new THREE.MeshStandardMaterial({map:TX.grass,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.set(22,-.21,16);ground.receiveShadow=true;SC.add(ground);
+// деревья и дорожка вокруг дома
+const EXT=new THREE.Group();SC.add(EXT);
+function tree(x,z,s){const t=new THREE.Mesh(new THREE.CylinderGeometry(.15*s,.22*s,1.4*s,8),mat('#6b4a2e'));t.position.set(x,.7*s-.2,z);t.castShadow=true;EXT.add(t);
+ [[0,1.9,0,1],[.5,1.6,.3,.75],[-.45,1.7,-.3,.8],[0,2.5,0,.7]].forEach(([dx,dy,dz,r])=>{const m=new THREE.Mesh(new THREE.IcosahedronGeometry(r*s,1),mat(sr()<.5?'#4f8f3f':'#5fa24b',{flatShading:true}));m.position.set(x+dx*s,dy*s-.2,z+dz*s);m.castShadow=true;EXT.add(m)})}
+[[3,4,1.3],[5,29,1.5],[41,3,1.2],[42,30,1.4],[17,31,1],[35,31,1.2],[19,1,.9],[2,25,1.1],[-6,10,1.6],[48,16,1.5],[-4,20,1.3],[30,-5,1.4],[10,-4,1.2],[46,-2,1.3],[20,37,1.5]].forEach(a=>tree(...a));
+{const p=new THREE.Mesh(new THREE.BoxGeometry(14,.04,2),mat('#d8ccb8',{roughness:.9}));p.position.set(-5.5,-.19,17);p.receiveShadow=true;EXT.add(p)}
+// ---------- примитивы ----------
+function M(G,geo,m,x,y,z,sh=1){const o=new THREE.Mesh(geo,typeof m==='string'?mat(m):m);o.position.set(x,y,z);if(sh){o.castShadow=true;o.receiveShadow=true}G.add(o);return o}
+const B=(G,w,h,d,m,x,y,z,sh)=>M(G,new THREE.BoxGeometry(w,h,d),m,x,y,z,sh);
+const C=(G,rt,rb,h,m,x,y,z,seg=24)=>M(G,new THREE.CylinderGeometry(rt,rb,h,seg),m,x,y,z);
+const SP=(G,r,m,x,y,z)=>M(G,new THREE.SphereGeometry(r,20,14),m,x,y,z);
+function emojiSprite(e,size){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');g.font='100px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(e,64,70);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,transparent:true}));s.scale.set(size,size,1);return s}
+function chair(G,x,z,c,a,velvet){const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=-a;G.add(g);const m=mat(c,{roughness:velvet?.95:.7});
+ B(g,.42,.09,.42,m,0,.34,0);const back=M(g,new THREE.CylinderGeometry(.24,.24,.34,16,1,true,-Math.PI/2-.9,1.8),mat(c,{roughness:.95,side:THREE.DoubleSide}),.02,.55,0);back.rotation.y=Math.PI;
+ for(const[dx,dz]of[[-.15,-.15],[.15,-.15],[-.15,.15],[.15,.15]])C(g,.015,.015,.32,GOLD,dx,.16,dz,6)}
+function sofa(G,x,z,w,d,c,side){const g=new THREE.Group();G.add(g);const m=mat(c,{roughness:.95}),cx=x+w/2,cz=z+d/2;
+ B(g,w,.28,d,m,cx,.14,cz);B(g,w-.08,.12,d-.08,mat(c,{roughness:1}),cx,.33,cz);
+ const th=.26;if(side==='n')B(g,w,.42,th,m,cx,.47,z+th/2);if(side==='s')B(g,w,.42,th,m,cx,.47,z+d-th/2);if(side==='w')B(g,th,.42,d,m,x+th/2,.47,cz);if(side==='e')B(g,th,.42,d,m,x+w-th/2,.47,cz);
+ const n=Math.max(1,Math.round((side==='w'||side==='e'?d:w)/1.1));for(let i=0;i<n;i++){const t=(i+.5)/n;if(side==='n'||side==='s')B(g,w/n-.12,.22,.14,mat(c,{roughness:1}),x+t*w,.5,side==='n'?z+th+.07:z+d-th-.07);else B(g,.14,.22,d/n-.12,mat(c,{roughness:1}),side==='w'?x+th+.07:x+w-th-.07,.5,z+t*d)}}
+function bed(G,x,z,w,d,c,head,big){B(G,w,.28,d,'#e9e3da',x+w/2,.14,z+d/2);B(G,w-.06,.12,d-.1,'#ffffff',x+w/2,.34,z+d/2+.03);B(G,w-.02,.08,d*.6,mat(c,{roughness:.95}),x+w/2,.42,z+d*.68);
+ if(big){B(G,w/2-.2,.12,.42,'#fbfbfb',x+w*.27,.47,z+.42);B(G,w/2-.2,.12,.42,'#fbfbfb',x+w*.73,.47,z+.42)}else B(G,w-.4,.12,.42,'#fbfbfb',x+w/2,.47,z+.42);
+ if(head==='shell'){const h=M(G,new THREE.CylinderGeometry(w/2,w/2,.2,24,1,false,-Math.PI/2,Math.PI),mat('#e8b5bd',{roughness:.95}),x+w/2,.55,z+.1);h.rotation.x=Math.PI/2;h.rotation.z=0;for(let i=1;i<6;i++){const r=B(G,.03,w/2,.04,'#d79aa5',x+w/2,.55,z+.21);r.geometry.translate(0,w/4,0);r.rotation.z=-Math.PI/2+i*Math.PI/6}}
+ else B(G,w,.75,.12,mat(head||'#cfc2b2',{roughness:.9}),x+w/2,.375,z+.06)}
+function furn(G,it,f,lamps){const[t,x,y,w,h,c,o]=it;const cx=x+(w||0)/2,cz=y+(h||0)/2;
+ switch(t){
+ case'rug':B(G,w,.02,h,mat(c,{roughness:1}),cx,.01,cz,0).receiveShadow=true;break;
+ case'frame':{const k=mat('#262523',{roughness:.2}),th=.22;B(G,w,.01,th,k,cx,.006,y,0);B(G,w,.01,th,k,cx,.006,y+h,0);B(G,th,.01,h,k,x,.006,cz,0);B(G,th,.01,h,k,x+w,.006,cz,0);break}
+ case'bench':B(G,w,.14,h,mat('#1c1c1c',{roughness:.9}),cx,.4,cz);for(const dx of[-1,1])for(const dz of[-1,1])C(G,.02,.02,.34,GOLD,cx+dx*(w/2-.1),.17,cz+dz*(h/2-.08),6);break;
+ case'console':B(G,w,.75,h,mat('#141414',{roughness:.25}),cx,.375,cz);SP(G,.12,'#e9d9b5',x+w*.8,.85,cz);break;
+ case'mirror':B(G,w,1,.06,GOLD,cx,1.05,y+.03);B(G,w-.16,.86,.07,mat('#d9e8ef',{metalness:.9,roughness:.05}),cx,1.05,y+.04);break;
+ case'entry':B(G,.12,1.25,h,'#ffffff',x+.35,.62,cz);B(G,.13,.9,.28,mat('#f0c64f',{emissive:'#8a6a10',emissiveIntensity:.3}),x+.35,.6,y-.2);B(G,.13,.9,.28,mat('#f0c64f',{emissive:'#8a6a10',emissiveIntensity:.3}),x+.35,.6,y+h+.2);SP(G,.04,GOLD,x+.45,.62,cz+.5);break;
+ case'counter':B(G,w,.6,h,'#fbfaf7',cx,.3,cz);B(G,w+.02,.05,h+.02,mat('#ece9e4',{roughness:.15}),cx,.625,cz);
+  if(w>h){B(G,w,.03,.03,GOLD,cx,.5,y+h+.01,0);for(let i=0;i<4;i++)C(G,.1,.1,.02,'#1f1f1f',x+w*.55+(i%2)*.32,.66,y+.25+(i>>1)*.32,16);B(G,.6,.02,.4,CHROME,x+w*.22,.655,cz)}else{B(G,.03,.03,h,GOLD,x+w+.01,.5,cz);C(G,.03,.03,.3,CHROME,x+.15,.8,y+1.5,8);B(G,.25,.3,.2,'#4a4a4a',x+.3,.8,y+h-1.2)}
+  B(G,w,.55,Math.min(h,.4),'#fbfaf7',cx,1.05,y+.2).castShadow=false;break;
+ case'window':B(G,w,.9,.07,mat('#cfe8f5',{emissive:'#cfe8f5',emissiveIntensity:.35,roughness:.1}),cx,.95,y+.04,0);break;
+ case'curtain':{const g=new THREE.Group();G.add(g);const n=Math.max(2,Math.round(w/.12));for(let i=0;i<n;i++)C(g,.06,.06,1.28,mat(c,{roughness:1}),x+(i+.5)*w/n,.64,y+.08,8);break}
+ case'rtable':{const r=w;for(let a=0;a<4;a++){const A=a*Math.PI/2+Math.PI/4;chair(G,x+Math.cos(A)*(r+.45),y+Math.sin(A)*(r+.45),'#3f857d',A,1)}
+  C(G,r,r,.06,new THREE.MeshStandardMaterial({map:TX.marble,roughness:.12}),x,.62,y,40);const p=C(G,.16,.24,.58,mat('#a77d4c',{roughness:.6}),x,.29,y,20);
+  const bowl=C(G,.13,.08,.07,'#ffffff',x+.25,.69,y-.1,16);C(G,.1,.1,.02,'#d39a3c',x+.25,.72,y-.1,16);break}
+ case'ltable':{for(let i=.5;i<w;i+=1){chair(G,x+i,y-.4,'#d8cbb8',-Math.PI/2);chair(G,x+i,y+h+.4,'#d8cbb8',Math.PI/2)}B(G,w,.07,h,mat('#6b4a2e',{roughness:.35}),cx,.62,cz);for(const dx of[-1,1])for(const dz of[-1,1])B(G,.08,.6,.08,'#5a3d24',cx+dx*(w/2-.15),.3,cz+dz*(h/2-.15));C(G,.12,.1,.2,'#ffffff',cx,.75,cz,12);SP(G,.12,'#e8743b',cx,.9,cz);break}
+ case'sofa':sofa(G,x,y,w,h,c,o);break;
+ case'ctable':C(G,w,w,.05,mat('#1e1e1e',{roughness:.1}),x,.42,y,32);M(G,new THREE.TorusGeometry(w*.8,.02,6,24),GOLD,x,.2,y).rotation.x=Math.PI/2;C(G,.02,.02,.4,GOLD,x,.2,y,6);break;
+ case'fire':{B(G,w,1.3,h,mat('#8c8170',{roughness:.5}),cx,.65,cz);B(G,.12,.5,h*.6,'#141414',x-.01,.32,cz);const fl=SP(G,.16,mat('#ff8a2a',{emissive:'#ff6a00',emissiveIntensity:2}),x-.05,.25,cz);fl.scale.set(.6,1.3,1.2);fl.castShadow=false;
+  const L=new THREE.PointLight(0xff8a3a,0,6,2);L.position.set(x-.6,.5,cz);G.add(L);lamps.push({L,fire:fl,base:1.1});break}
+ case'wallart':B(G,w,1.25,.06,mat(c,{roughness:.4}),cx,.65,y+.03);for(let i=0;i<3;i++){const g2=B(G,w,.025,.02,GOLD,cx,.35+i*.3,y+.07,0);g2.rotation.z=Math.sin(i)*.06}for(const dx of[.6,w-.6]){B(G,.2,.12,.12,'#111',x+dx,1.05,y+.1);C(G,.035,.035,.25,mat('#d4a94f',{emissive:'#d4a94f',emissiveIntensity:.5}),x+dx,.88,y+.1,8)}break;
+ case'screen':B(G,w,1,.08,'#111111',cx,.9,y);B(G,w-.15,.85,.02,mat('#1d2c44',{emissive:'#3a6ea8',emissiveIntensity:.8,roughness:.2}),cx,.9,y-.05,0);B(G,w*.8,.25,.35,'#4a4a4a',cx,.12,y-.2);break;
+ case'ps':B(G,w,.08,h,'#f2f2f2',cx,.3,cz);B(G,.06,.09,h,mat('#4a90e2',{emissive:'#4a90e2',emissiveIntensity:.6}),cx,.3,cz,0);break;
+ case'shelf':{B(G,w,1.3,h,'#3a2c20',cx,.65,cz);const C4=['#a33','#2a5d8a','#c9a35b','#3d7a4b','#e0d6c4'];for(let r=0;r<4;r++)for(let i=.15;i<h-.15;i+=.13)B(G,.06,.22+((i*37|0)%3)*.03,.1,C4[(i*17+r|0)%5],x+w-.04,.2+r*.3,y+i,0);break}
+ case'desk':B(G,w,.06,h,mat(c||'#e9e3da',{roughness:.5}),cx,.58,cz);for(const dx of[-1,1])B(G,w>h?.06:w-.05,.55,w>h?h-.05:.06,mat(c||'#e9e3da'),w>h?cx+dx*(w/2-.05):cx,.28,w>h?cz:cz+dx*(h/2-.05));break;
+ case'laptop':{B(G,.5,.03,.35,'#2b2b2b',x+.25,.63,y+.25);const s=B(G,.5,.33,.02,mat('#1a2a3a',{emissive:'#5ab0e0',emissiveIntensity:.5}),x+.25,.8,y+.08);s.rotation.x=-.25;break}
+ case'seat':{const s=C(G,w,w*1.05,.38,mat(c,{roughness:1}),x,.19,y,20);break}
+ case'plant':C(G,.2,.15,.38,'#b0704a',x,.19,y,12);for(let i=0;i<7;i++){const a=i*0.9,r=.12+sr()*.15;const l=M(G,new THREE.IcosahedronGeometry(.17+sr()*.08,0),mat(i%2?'#3f8a4a':'#56a35a',{flatShading:true}),x+Math.cos(a)*r,.55+sr()*.45,y+Math.sin(a)*r)}break;
+ case'bed':bed(G,x,y,w,h,c);break;
+ case'shell':bed(G,x,y,w,h,'#efc6cc','shell');break;
+ case'bigbed':bed(G,x,y,w,h,'#d8cbbb','#cfc2b2',1);break;
+ case'stand':B(G,.6,.5,.5,'#8b7a68',x+.3,.25,y+.25);C(G,.12,.17,.22,mat('#fff3c4',{emissive:'#ffdf9a',emissiveIntensity:.6}),x+.3,.65,y+.25,12);break;
+ case'goal':{const m=mat('#ffffff');for(const dz of[0,h])C(G,.035,.035,.9,m,x,.45,y+dz,8);const tb=C(G,.035,.035,h,m,x,.9,cz,8);tb.rotation.x=Math.PI/2;const n=B(G,w,.9,h,new THREE.MeshStandardMaterial({color:'#ffffff',wireframe:true,transparent:true,opacity:.5}),cx,.45,cz,0);break}
+ case'ball':{const b=SP(G,.16,'#ffffff',x,.16,y);SP(G,.07,'#222222',x+.08,.24,y+.08);break}
+ case'bbq':C(G,.45,.35,.4,'#2a2a2a',cx,.75,cz,20);C(G,.4,.4,.02,mat('#ff6a1a',{emissive:'#ff5500',emissiveIntensity:1.2}),cx,.95,cz,20);for(const a of[0,2.1,4.2])C(G,.03,.03,.6,'#2a2a2a',cx+Math.cos(a)*.3,.3,cz+Math.sin(a)*.3,6);break;
+ case'lounge':{const l=B(G,w,.12,h,'#ffffff',cx,.3,cz);const bk=B(G,.6,.1,h,'#ffffff',x+.2,.5,cz);bk.rotation.z=.7;for(let i=.2;i<w;i+=.4)B(G,.15,.13,h+.01,'#4aa3c7',x+i,.31,cz,0);break}
+ case'house':B(G,w,1,h,'#f7a1b5',cx,.5,cz);{const r=M(G,new THREE.ConeGeometry(w*.8,.8,4),'#e8743b',cx,1.4,cz);r.rotation.y=Math.PI/4}B(G,.45,.6,.05,'#ffffff',cx,.3,y+h+.01);break;
+ case'slide':{const s=B(G,w,.08,h,'#ffd36b',cx,.6,cz);s.rotation.x=.42;B(G,w,1.2,.1,'#3a9d5d',cx,.6,y);break}
+ case'deco':{const s=emojiSprite(c,w*1.3);s.position.set(x,.9,y);G.add(s);break}
+ case'lamp':{const g=new THREE.Group();g.position.set(x,2.15,y);G.add(g);C(g,.006,.006,.6,CHROME,0,.3,0,4);M(g,new THREE.TorusGeometry(.32,.025,8,28),CHROME,0,0,0,0).rotation.x=Math.PI/2;
+  const bm=mat('#fff6d8',{emissive:'#ffe2a0',emissiveIntensity:.2});const bulbs=[];for(let i=0;i<8;i++){const a=i/8*Math.PI*2;const b=SP(g,.05,bm,Math.cos(a)*.32,.07,Math.sin(a)*.32);b.castShadow=false;bulbs.push(b)}
+  const L=new THREE.PointLight(0xffd59a,0,8,2);L.position.y=-.3;g.add(L);lamps.push({L,bm,base:.9});break}
+ }}
+// ---------- сборка этажей ----------
+const GF={},LAMPS={},LABELS={};
+function buildFloor(f){const F=FL[f],G=new THREE.Group();LAMPS[f]=[];
+ const by={},geo=new THREE.BoxGeometry(1,.2,1),Mx=new THREE.Matrix4(),MC=['#f7a1b5','#ffd36b','#9ed99a','#8ec5ff'];
+ for(let y=0;y<F.h;y++)for(let x=0;x<F.w;x++){const k=F.g[y][x];if(!k)continue;const st=k==='door'?'door':STYLE[k]||'wood';(by[st]=by[st]||[]).push([x,y])}
+ for(const st in by){const L=by[st],m=new THREE.InstancedMesh(geo,FMAT[st],L.length);L.forEach(([x,y],i)=>{Mx.makeTranslation(x+.5,-.1,y+.5);m.setMatrixAt(i,Mx);if(st==='mats')m.setColorAt(i,lin(MC[(x+y*2)%4]))});m.receiveShadow=true;G.add(m)}
+ // стены, окна
+ const wall=[],isW=[];for(let y=0;y<F.h;y++){isW.push([]);for(let x=0;x<F.w;x++){let w=0;if(!F.g[y][x]){if(F.X.some(d=>x>=d[0]&&x<d[0]+d[2]&&y>=d[1]&&y<d[1]+d[3]))w=2;else for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++)if(F.g[y+dy]?.[x+dx])w=1}isW[y].push(w)}}
+ const W=[],GL=[];for(let y=0;y<F.h;y++)for(let x=0;x<F.w;x++){if(!isW[y][x])continue;let out=false;for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const r=isW[y+dy]?.[x+dx];if(r===undefined||(!r&&!F.g[y+dy][x+dx]))out=true}
+  const near=[[1,0],[-1,0],[0,1],[0,-1]].map(([dx,dy])=>F.g[y+dy]?.[x+dx]).find(k=>k&&ROOMS[k]&&k!=='yard'&&!k.startsWith('corr'));
+  if(isW[y][x]===1&&out&&near&&(x*7+y*13)%3!==0)GL.push([x,y]);else W.push([x,y])}
+ const inst=(L,g,m,yy,sh)=>{const im=new THREE.InstancedMesh(g,m,L.length);L.forEach(([x,y],i)=>{Mx.makeTranslation(x+.5,yy,y+.5);im.setMatrixAt(i,Mx)});im.castShadow=sh;im.receiveShadow=true;G.add(im)};
+ inst(W,new THREE.BoxGeometry(1,1.3,1),mat('#ece5da',{roughness:.9}),.65,true);inst(W.concat(GL),new THREE.BoxGeometry(1.001,.06,1.001),mat('#5b5048',{roughness:.8}),1.33,false);
+ inst(GL,new THREE.BoxGeometry(1,.35,1),mat('#ece5da'),.175,true);inst(GL,new THREE.BoxGeometry(.98,.92,.98),new THREE.MeshStandardMaterial({color:lin('#bfe3f5'),transparent:true,opacity:.28,roughness:.05,metalness:.3}),.82,false);
+ // лестница
+ for(const k in F.S)if(/^s\d$/.test(k)){const s=F.S[k][0];for(let i=0;i<6;i++)B(G,s[3]/2,.14*(i+1),.6,mat('#cdbfae',{roughness:.6}),s[1]+s[3]*.75,.07*(i+1),s[2]+.3+i*.62);B(G,.05,.9,s[4],'#3a2c20',s[1]+s[3]/2,.45,s[2]+s[4]/2);const a=emojiSprite(f===3?'⬇️':f===1?'⬆️':'↕️',.7);a.position.set(s[1]+s[3]*.28,.6,s[2]+s[4]/2);G.add(a)}
+ for(const it of F.I)furn(G,it,f,LAMPS[f]);
+ G.visible=false;SC.add(G);GF[f]=G}
+[1,2,3].forEach(buildFloor);
+// ================= ПЕРСОНАЖИ =================
+function mkChar(id){const L=LOOK[id],g=new THREE.Group(),sk=mat('#f1c7a5',{roughness:.6}),hm=mat(L.hair,{roughness:.55}),tm=mat(L.top,{roughness:.85}),bm=mat(L.bot,{roughness:.85});
+ const legs=[],arms=[];
+ for(const s of[-1,1]){const p=new THREE.Group();p.position.set(s*.085,.46,0);M(p,new THREE.CylinderGeometry(.06,.055,.44,10),bm,0,-.22,0);M(p,new THREE.BoxGeometry(.11,.07,.19),'#2b2b2b',0,-.43,.03);g.add(p);legs.push(p)}
+ const body=L.dress?M(g,new THREE.CylinderGeometry(.14,.3,.56,18),tm,0,.66,0):M(g,new THREE.CylinderGeometry(.18,.15,.5,18),tm,0,.71,0);
+ SP(g,.17,tm,0,.92,0).scale.set(1.05,.45,.8);
+ for(const s of[-1,1]){const p=new THREE.Group();p.position.set(s*.22,.93,0);M(p,new THREE.CylinderGeometry(.05,.045,.42,8),tm,0,-.2,0);SP(p,.055,sk,0,-.43,0);g.add(p);arms.push(p)}
+ C(g,.06,.06,.1,sk,0,1,0,8);
+ const head=new THREE.Group();head.position.y=1.17;g.add(head);
+ SP(head,.2,sk,0,0,0);
+ const cap=M(head,new THREE.SphereGeometry(.215,24,16,0,Math.PI*2,0,Math.PI*.52),hm,0,.015,-.01);cap.rotation.x=-.35;
+ SP(head,.205,hm,0,-.01,-.045);
+ if(L.st==='long'){B(head,.38,.46,.1,hm,0,-.22,-.15);}
+ if(L.st==='pony'){SP(head,.09,hm,0,.06,-.24);M(head,new THREE.ConeGeometry(.07,.32,10),hm,0,-.12,-.27).rotation.x=Math.PI}
+ if(L.st==='pig'){for(const s of[-1,1]){SP(head,.08,hm,s*.21,-.03,-.03);SP(head,.03,'#ff5d8f',s*.19,.05,-.03)}}
+ if(L.st==='beard')M(head,new THREE.SphereGeometry(.208,20,12,0,Math.PI*2,Math.PI*.58,Math.PI*.42),hm,0,-.01,.012);
+ for(const s of[-1,1]){SP(head,.027,'#2a1d15',s*.075,.02,.18).castShadow=false;if(L.s<.9)SP(head,.03,'#ff9db0',s*.12,-.05,.155).castShadow=false}
+ const mo=M(head,new THREE.TorusGeometry(.04,.009,6,12,Math.PI),'#8a3a2a',0,-.07,.19,0);mo.rotation.z=Math.PI;
+ g.scale.setScalar(L.s*1.3);SC.add(g);return{g,legs,arms,head,body}}
+// ================= СОСТОЯНИЕ =================
+let S=null,E={},cur=1,CAMS={yaw:0,pitch:1.0,dist:15},LA=new THREE.Vector3(22,0,16),T0=performance.now(),AMB={t:5};
+const $=s=>document.querySelector(s),rnd=a=>a[Math.floor(Math.random()*a.length)],clamp=v=>Math.max(0,Math.min(100,v));
 function pickRoom(fav){let t=0;for(const k in fav)t+=fav[k];let x=Math.random()*t;for(const k in fav){x-=fav[k];if(x<=0)return k}return 'living'}
-function moveNPC(){for(const id of ALL)if(id!==S.me)S.pos[id]=id==='so'&&S.h<14?'away':pickRoom(P[id].fav)}
-function start(id){
- const so=id==='so';
- S={me:id,h:so?14:8,en:80,mo:60,room:so?'hall':{an:'bed',lev:'bed',ti:'boys',ev:'girls',mi:'girls',leo:'leor'}[id],pos:{},rel:{},q:{},log:[],seen:new Set(),gifted:new Set(),bunny:rnd(Object.keys(ROOMS).filter(r=>r!=='girls'))};
- ALL.forEach(x=>S.rel[x]=50);moveNPC();
- S.log.unshift(so?'Суббота, 14:00. Вы приехали в гости к родным! Все бегут встречать.':'Суббота, 8:00. Дом Саджая просыпается… Говорят, в гости приедет Соня!');
- render();
-}
-function ppl(room){return ALL.filter(id=>id!==S.me&&S.pos[id]===room)}
-function targets(w){const l=w==='all'?ALL:(Array.isArray(w)?w:GROUP[w]);return l.filter(x=>x!==S.me&&S.pos[x]===S.room)}
-function fill(s,id){return s.replace(/\{n\}/g,id?P[id].n:'')}
-function apply(o,who){
- S.en=clamp(S.en+(o.e||0));S.mo=clamp(S.mo+(o.m||0));
- if(who&&o.rl)S.rel[who]=clamp(S.rel[who]+o.rl);
- if(o.rel)for(const k in o.rel)if(k!==S.me)S.rel[k]=clamp(S.rel[k]+o.rel[k]);
- if(o.all)ALL.forEach(k=>{if(k!==S.me)S.rel[k]=clamp(S.rel[k]+o.all)});
-}
-function act(i,who){
- const a=allActions()[i];let msg;
- if(a.bunny){
-  apply(a);
-  if(S.q.bunny)msg='Буся уже у вас в обнимку.';
-  else if(S.room===S.bunny){S.q.bunny=1;S.mo=clamp(S.mo+25);msg='🐰 УРА! Буся нашёлся! Он спал под подушкой!'}
-  else msg=rnd(['Здесь Буси нет… Только носок Лео.','Под диваном пусто. Может, в другой комнате?','Буси нет. Зато нашлась конфета!'])+' (Подсказка: '+ROOMS[S.bunny][1].slice(0,1)+'…)';
- }else if(a.p&&Math.random()<a.p){apply(a.f,who);msg=fill(a.f.log,who)}
- else{apply(a,who);if(a.q)S.q[a.q]=(S.q[a.q]||0)+1;msg=fill(a.log,who);if(a.once)S.gifted.add(who)}
- S.log.unshift(`${S.h}:00 — ${msg}`);
- nextHour();
-}
-function nextHour(){
- S.h++;moveNPC();
- if(S.h===14&&S.me!=='so')S.log.unshift('14:00 — 🚗 Приехала Соня! Все бегут её обнимать.');
- if(S.h>=21)return end();
- render();
- if(Math.random()<.3)event();
-}
-function event(){
- const list=EV.filter((x,i)=>!S.seen.has(i)&&!(x.not||[]).includes(S.me)&&(!x.only||x.only.includes(S.me)));
- if(!list.length)return;
- const ev=rnd(list);S.seen.add(EV.indexOf(ev));
- const m=document.createElement('div');m.className='modal';
- m.innerHTML=`<div class="card pop"><div class="big">${ev.e}</div><p><b>${ev.t}</b></p><div class="btns" style="justify-content:center"></div></div>`;
- ev.c.forEach(([t,o])=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{apply(o);S.log.unshift(`${S.h}:00 — ${ev.e} ${t}`);m.remove();render()};m.querySelector('.btns').append(b)});
- document.body.append(m);
-}
+function mkEnt(id){const o=mkChar(id),n=document.createElement('div');n.className='nm';n.textContent=P[id].n;$('#lbl').append(n);const b=document.createElement('div');b.className='bub';b.style.display='none';$('#lbl').append(b);
+ return Object.assign(o,{id,f:1,x:0,y:0,path:[],next:null,wait:Math.random()*3,busy:0,ang:0,ph:0,mv:0,nm:n,bb:b,bubT:0,gcd:0,last:null,doing:0})}
+ALL.forEach(id=>E[id]=mkEnt(id));
+function place(e,room){const t=rnd(RT[room]);e.f=ROOMS[room][2];e.x=t[0];e.y=t[1];e.path=[];e.next=null;e.last=room}
+function go(e,room,tile){const tf=ROOMS[room][2];tile=tile||rnd(RT[room]);
+ if(tf===e.f){e.path=bfs(e.f,e.x,e.y,tile[0],tile[1])||[];e.next=null}else{const s=STAIR[e.f];e.path=bfs(e.f,e.x,e.y,s[0],s[1])||[];e.next={f:tf,tile}}}
+function bubble(e,t,sec){e.bb.textContent=t;e.bb.className='bub'+([...t].length<=2?' big':'');e.bb.style.display='block';e.bubT=sec}
+function roomOf(e){const r=roomAt(e.f,e.x,e.y);if(r&&r!=='door'){e.last=r;return r}return e.last}
+function npcUpdate(e,dt){if(e.f===0)return;if(e.busy>0){e.busy-=dt;e.mv=0;return}
+ if(e.path.length)return walk(e,e.id==='mi'||e.id==='leo'?2.7:2.2,dt);
+ e.mv=0;if(e.next){const n=e.next;fadeIf(e);e.f=n.f;const s=STAIR[n.f];e.x=s[0];e.y=s[1];e.path=bfs(e.f,e.x,e.y,n.tile[0],n.tile[1])||[];e.next=null;return}
+ if(S&&S.over)return;e.wait-=dt;if(e.wait>0)return;e.wait=5+Math.random()*9;
+ const cr=roomOf(e);if(Math.random()<.35&&cr&&RT[cr])go(e,cr);else go(e,pickRoom(P[e.id].fav))}
+function fadeIf(){}
+function walk(e,sp,dt){const p=e.path[0],dx=p[0]-e.x,dy=p[1]-e.y,d=Math.hypot(dx,dy),st=sp*dt;if(d<=st){e.x=p[0];e.y=p[1];e.path.shift()}else{e.x+=dx/d*st;e.y+=dy/d*st}e.mv=1;e.ang=Math.atan2(dx,dy)}
+function free(f,x,y){return[[-.2,-.15],[.2,-.15],[-.2,.15],[.2,.15]].every(([a,b])=>pass(f,Math.floor(x+a),Math.floor(y+b)))}
+function animChar(e,dt){const g=e.g;g.visible=e.f===cur;g.position.set(e.x,0,e.y);let da=e.ang-g.rotation.y;da=Math.atan2(Math.sin(da),Math.cos(da));g.rotation.y+=da*Math.min(1,dt*12);
+ if(e.mv)e.ph+=dt*11;const s=e.mv?Math.sin(e.ph):0;e.legs[0].rotation.x=s*.65;e.legs[1].rotation.x=-s*.65;
+ if(e.doing>0){e.doing-=dt;const w=Math.sin(performance.now()/90);e.arms[0].rotation.x=-2.4+w*.3;e.arms[1].rotation.x=-2.4-w*.3;g.position.y=Math.abs(Math.sin(performance.now()/120))*.08}
+ else{e.arms[0].rotation.x=-s*.55;e.arms[1].rotation.x=s*.55;g.position.y=e.mv?Math.abs(s)*.035:0}
+ e.head.rotation.z=e.mv?0:Math.sin(performance.now()/900+e.x)*.05;e.body.scale.y=1+(e.mv?0:Math.sin(performance.now()/500+e.y)*.015)}
+const V=new THREE.Vector3();
+function labels(){const W=innerWidth,H=innerHeight;for(const id in E){const e=E[id],vis=e.f===cur&&e.g.visible;
+ if(!vis){e.nm.style.display='none';e.bb.style.display='none';continue}
+ V.set(e.x,0,e.y).project(CAM);const x=(V.x+1)/2*W,y=(1-V.y)/2*H;if(V.z>1){e.nm.style.display='none';continue}
+ e.nm.style.display='block';e.nm.style.transform=`translate(${x}px,${y+4}px) translate(-50%,0)`;e.nm.className='nm'+(S&&S.me===id?' me':'');e.nm.textContent=S&&S.me===id?'Вы · '+P[id].n:P[id].n;
+ if(e.bubT>0){V.set(e.x,LOOK[id].s*1.3*1.45,e.y).project(CAM);e.bb.style.display='block';e.bb.style.transform=`translate(${(V.x+1)/2*W}px,${(1-V.y)/2*H-6}px) translate(-50%,-100%)`}else e.bb.style.display='none'}}
+// ================= СВЕТ ДНЯ =================
+const SKY={8:['#bfe3f5',1.15,'#ffffff',.65,0],12:['#b5ddf5',1.25,'#ffffff',.7,0],16:['#c9e0ec',1.05,'#fff1dc',.62,0],18:['#f3c89e',.8,'#ffc88a',.5,.6],19:['#e7a27c',.55,'#ff9a5a',.42,1],20:['#4a5478',.28,'#9fb0ff',.32,1],21:['#2a3350',.18,'#8fa0ff',.25,1]};
+let TOD=SKY[8];function skyFor(h){let k=8;for(const kk in SKY)if(h>=+kk)k=+kk;return SKY[k]}
+function lightUpd(dt){const tg=skyFor(S?S.h:11),a=Math.min(1,dt*1.5);SC.background.lerp(new THREE.Color(tg[0]),a);SC.fog.color.copy(SC.background);SUN.intensity+=(tg[1]-SUN.intensity)*a;SUN.color.lerp(new THREE.Color(tg[2]),a);HEMI.intensity+=(tg[3]-HEMI.intensity)*a;
+ const lv=tg[4],t=performance.now()/1000;for(const l of LAMPS[cur]||[]){if(l.fire){const fl=.8+Math.sin(t*9)*.15+Math.sin(t*23)*.1;l.L.intensity=l.base*(.6+lv)*fl;l.fire.scale.y=1.2+Math.sin(t*13)*.25;continue}l.L.intensity+=(l.base*lv-l.L.intensity)*a;l.bm.emissiveIntensity=.2+lv*1.6}}
+// ================= УПРАВЛЕНИЕ =================
+const K={};addEventListener('keydown',e=>{if(e.target.tagName==='BUTTON'&&e.key===' ')return;K[e.code]=1;if(e.code==='KeyQ')CAMS.yaw+=.3;if(e.code==='KeyE')CAMS.yaw-=.3});addEventListener('keyup',e=>K[e.code]=0);
+const PT={},cv=R3.domElement;let drag=0,pinch=0;
+cv.addEventListener('pointerdown',e=>{PT[e.pointerId]={x:e.clientX,y:e.clientY,sx:e.clientX,sy:e.clientY};drag=0;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{const p=PT[e.pointerId];if(!p)return;const ids=Object.keys(PT);
+ if(ids.length===2){const[a,b]=ids.map(i=>PT[i]);const d0=Math.hypot(a.x-b.x,a.y-b.y);p.x=e.clientX;p.y=e.clientY;const d1=Math.hypot(a.x-b.x,a.y-b.y);CAMS.dist=Math.max(6,Math.min(30,CAMS.dist*d0/d1));drag=1;return}
+ const dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;if(Math.hypot(e.clientX-p.sx,e.clientY-p.sy)>8)drag=1;if(drag){CAMS.yaw-=dx*.008;CAMS.pitch=Math.max(.45,Math.min(1.4,CAMS.pitch+dy*.005))}});
+cv.addEventListener('pointerup',e=>{const p=PT[e.pointerId];delete PT[e.pointerId];if(!p||drag||!S||S.busy||S.over)return;
+ const r=new THREE.Raycaster();r.setFromCamera({x:e.clientX/innerWidth*2-1,y:-(e.clientY/innerHeight)*2+1},CAM);const hit=new THREE.Vector3();if(!r.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,1,0),0),hit))return;
+ const me=E[S.me],path=bfs(me.f,me.x,me.y,hit.x,hit.z);if(path){me.path=path;mark(hit.x,hit.z)}});
+cv.addEventListener('wheel',e=>{CAMS.dist=Math.max(6,Math.min(30,CAMS.dist*(1+e.deltaY*.001)));e.preventDefault()},{passive:false});
+const MK=new THREE.Mesh(new THREE.RingGeometry(.18,.28,24),new THREE.MeshBasicMaterial({color:'#e8743b',transparent:true,opacity:.9,depthWrite:false}));MK.rotation.x=-Math.PI/2;MK.visible=false;SC.add(MK);
+function mark(x,z){MK.position.set(Math.floor(x)+.5,.03,Math.floor(z)+.5);MK.visible=true;MK.material.opacity=.9}
+function playerUpdate(dt){const me=E[S.me];if(S.busy){me.mv=0;return}
+ let ix=(K.ArrowRight||K.KeyD?1:0)-(K.ArrowLeft||K.KeyA?1:0),iz=(K.ArrowDown||K.KeyS?1:0)-(K.ArrowUp||K.KeyW?1:0);
+ if(ix||iz){me.path=[];const y=CAMS.yaw,dx=ix*Math.cos(y)+iz*Math.sin(y),dz=-ix*Math.sin(y)+iz*Math.cos(y),l=Math.hypot(dx,dz),st=3.3*dt;
+  const nx=me.x+dx/l*st,nz=me.y+dz/l*st;if(free(me.f,nx,me.y))me.x=nx;if(free(me.f,me.x,nz))me.y=nz;me.mv=1;me.ang=Math.atan2(dx,dz)}
+ else if(me.path.length)walk(me,3.3,dt);else me.mv=0;
+ if(!me.path.length)MK.material.opacity*=.9;
+ const r=roomOf(me);if(r!==S.room){S.room=r;panel()}
+ for(const id in E){const n=E[id];if(id===S.me||n.f!==me.f)continue;if(Math.hypot(n.x-me.x,n.y-me.y)<1.7&&n.gcd<=0&&n.bubT<=0){n.gcd=25;bubble(n,rnd(P[id].say),3.5)}}}
+// ================= ЦИКЛ =================
+function resize(){R3.setSize(innerWidth,innerHeight,false);CAM.aspect=innerWidth/innerHeight;CAM.updateProjectionMatrix()}addEventListener('resize',resize);resize();
+let last=performance.now(),acc=0;
+function loop(t){const dt=Math.min(.05,(t-last)/1000);last=t;
+ for(const id in E){const e=E[id];if(S&&id===S.me)continue;npcUpdate(e,dt);}
+ if(S&&!S.done)playerUpdate(dt);
+ for(const id in E){const e=E[id];e.gcd-=dt;if(e.bubT>0)e.bubT-=dt;animChar(e,dt)}
+ // камера
+ let tx,tz;if(S){const me=E[S.me];tx=me.x;tz=me.y;if(me.f!==cur)setFloor(me.f)}else{CAMS.yaw+=dt*.06;tx=23;tz=16;CAMS.dist=38;CAMS.pitch=.85}
+ LA.lerp(V.set(tx,.5,tz),Math.min(1,dt*6));const hd=Math.cos(CAMS.pitch)*CAMS.dist;CAM.position.set(LA.x+Math.sin(CAMS.yaw)*hd,Math.sin(CAMS.pitch)*CAMS.dist,LA.z+Math.cos(CAMS.yaw)*hd);CAM.lookAt(LA);
+ SUN.position.set(LA.x+20,40,LA.z+14);SUN.target.position.copy(LA);
+ // болтовня
+ AMB.t-=dt;if(AMB.t<=0){AMB.t=5+Math.random()*6;const c=ALL.filter(id=>E[id].f===cur&&(!S||id!==S.me)&&E[id].bubT<=0);if(c.length){const id=rnd(c);bubble(E[id],rnd(P[id].say),3.5)}}
+ lightUpd(dt);
+ if(S){acc+=dt;if(acc>.3){acc=0;if(sig()!==S.sig)panel()}}
+ R3.render(SC,CAM);labels();requestAnimationFrame(loop)}
+function setFloor(f){GF[cur].visible=false;cur=f;GF[f].visible=true;ground.position.y=f===1?-.21:-3.2;EXT.position.y=f===1?0:-3;S&&(S.sig='')}
+GF[1].visible=true;
+// ================= ИГРА =================
+function initWorld(meId){ALL.forEach(id=>{const e=E[id];const fav=Object.keys(P[id].fav);place(e,rnd(fav));e.wait=Math.random()*4;e.busy=0;e.bubT=0});
+ if(meId!=='so'&&meId){E.so.f=0}
+ if(meId){const me=E[meId],start={an:'bed',lev:'bed',ti:'boys',ev:'girls',mi:'girls',leo:'leor',so:'hall'}[meId];place(me,start);if(meId==='so'){me.x=2.6;me.y=17.5}}}
+initWorld(null);
+function start(id){$('#ov').innerHTML='';$('#ov').className='';
+ S={me:id,h:id==='so'?14:8,en:80,mo:60,room:null,rel:{},q:{},log:[],seen:new Set(),gifted:new Set(),busy:0,over:0,sig:'',bunny:rnd(['kitchen','dining','study','living','tv','yard','boys','leor','bed','play','sroom','hall'])};
+ ALL.forEach(x=>S.rel[x]=50);initWorld(id);const me=E[id];setFloor(me.f);LA.set(me.x,.5,me.y);CAMS.dist=innerWidth<700?12:15;CAMS.pitch=1.0;CAMS.yaw=0;
+ $('#hud').style.display='flex';$('#panel').style.display='block';hud();
+ toast(id==='so'?'Суббота, 14:00. Вы приехали в гости! Все бегут встречать.':'Суббота, 8:00. Дом Саджая просыпается… Говорят, приедет Соня!');
+ S.log.unshift(id==='so'?'14:00 — Вы приехали в гости.':'8:00 — Доброе утро!')}
+function hud(){const me=P[S.me],bar=v=>`<span class="bar"><i style="width:${v}%"></i></span>`;
+ $('#hud').innerHTML=`<div style="font-weight:700">${me.e} ${me.n} <span class="hint">· ${me.r}</span></div>
+ <div class="st"><span>🕐 ${S.h}:00</span><span>⚡ ${bar(S.en)}</span><span>😊 ${bar(S.mo)}</span><span class="hint">${cur} этаж</span></div>
+ <div class="btns"><button class="ic" onclick="showQ()" title="Задания">🎯</button><button class="ic" onclick="showRel()" title="Отношения">❤️</button><button class="ic" onclick="showLog()" title="Дневник">📜</button><button class="ic" onclick="location.reload()" title="Меню">🏠</button></div>`}
+function here(){const me=E[S.me];return ALL.filter(id=>id!==S.me&&E[id].f===me.f&&roomOf(E[id])===S.room)}
+function sig(){return [S.room,here().join(),S.h,S.en,S.busy,cur].join('|')}
+function targets(w){const l=w==='all'?ALL:(Array.isArray(w)?w:GROUP[w]);const h=here();return l.filter(x=>h.includes(x))}
+const fill=(s,id)=>s.replace(/\{n\}/g,id?P[id].n:'');
 function allActions(){return A[S.me].concat(COMMON)}
+function panel(){S.sig=sig();hud();const r=S.room;let html='';
+ if(!r){$('#panel').innerHTML='<span class="hint">Идите в комнату…</span>';return}
+ if(/^s\d$/.test(r)){const f=+r[1];html=`<h3>🪜 Лестница · ${f} этаж</h3><div class="btns">${[1,2,3].filter(x=>x!==f).map(x=>`<button class="main" onclick="stairs(${x})">${x>f?'⬆':'⬇'} На ${x} этаж</button>`).join('')}</div>`;$('#panel').innerHTML=html;return}
+ const h=here();let b='';
+ allActions().forEach((a,i)=>{if(!a.r.includes(r))return;const tired=a.e<0&&S.en+a.e<0;
+  if(a.w)targets(a.w).filter(id=>!(a.once&&S.gifted.has(id))).forEach(id=>b+=`<button ${tired||S.busy?'disabled':''} onclick="act(${i},'${id}')">${fill(a.t,id)}</button>`);
+  else b+=`<button ${tired||S.busy?'disabled':''} onclick="act(${i})">${a.t}${tired?' (нет сил)':''}</button>`});
+ $('#panel').innerHTML=`<h3>${ROOMS[r][0]} ${ROOMS[r][1]}${h.length?' · рядом: '+h.map(x=>P[x].e+' '+P[x].n).join(', '):''}</h3><div class="btns">${b||'<span class="hint">Здесь нечего делать — идите в другую комнату. Ходите стрелками/WASD или нажимайте на пол, крутите камеру мышью.</span>'}</div>`}
+function stairs(f){const me=E[S.me];fade(()=>{me.f=f;const s=STAIR[f];me.x=s[0]+.6;me.y=s[1];me.path=[];setFloor(f);LA.set(me.x,.5,me.y);S.room=null})}
+function fade(cb){$('#fade').style.opacity=1;setTimeout(()=>{cb();$('#fade').style.opacity=0},380)}
+let toastT;function toast(t){const el=$('#toast');el.textContent=t;el.style.opacity=1;clearTimeout(toastT);toastT=setTimeout(()=>el.style.opacity=0,3800)}
+function apply(o,who){S.en=clamp(S.en+(o.e||0));S.mo=clamp(S.mo+(o.m||0));if(who&&o.rl)S.rel[who]=clamp(S.rel[who]+o.rl);if(o.rel)for(const k in o.rel)if(k!==S.me)S.rel[k]=clamp(S.rel[k]+o.rel[k]);if(o.all)ALL.forEach(k=>{if(k!==S.me)S.rel[k]=clamp(S.rel[k]+o.all)})}
+function act(i,who){if(S.busy||S.over)return;const a=allActions()[i],me=E[S.me];S.busy=1;me.path=[];me.doing=1.3;panel();
+ bubble(me,[...a.t][0]==='📱'?'📱':a.t.split(' ')[0],1.8);
+ if(who){const n=E[who];n.path=[];n.next=null;n.busy=2.2;n.ang=Math.atan2(me.x-n.x,me.y-n.y);me.ang=Math.atan2(n.x-me.x,n.y-me.y);setTimeout(()=>bubble(n,(a.rl||0)<0?'😤':'❤️',1.6),600)}
+ setTimeout(()=>{let msg;
+  if(a.bunny){apply(a);if(S.q.bunny)msg='Буся уже у вас в обнимку.';else if(S.room===S.bunny){S.q.bunny=1;S.mo=clamp(S.mo+25);msg='🐰 УРА! Буся нашёлся!';bubble(me,'🐰',2.5)}else msg=rnd(['Здесь Буси нет… Только носок Лео.','Под диваном пусто.','Буси нет. Зато нашлась конфета!'])+' Подсказка: «'+ROOMS[S.bunny][1].slice(0,2)+'…»'}
+  else if(a.p&&Math.random()<a.p){apply(a.f,who);msg=fill(a.f.log,who)}
+  else{apply(a,who);if(a.q)S.q[a.q]=(S.q[a.q]||0)+1;msg=fill(a.log,who);if(a.once)S.gifted.add(who)}
+  S.log.unshift(`${S.h}:00 — ${msg}`);toast(msg);S.busy=0;nextHour()},1300)}
+function nextHour(){S.h++;
+ if(S.h===14&&S.me!=='so'){const so=E.so;so.f=1;so.x=2.6;so.y=17.5;so.path=[];so.wait=3;bubble(so,'Я приехала! 🤗',4);toast('🚗 Приехала Соня! Все бегут её обнимать.');S.log.unshift('14:00 — 🚗 Приехала Соня!')}
+ if(S.h>=21)return dinner();S.sig='';hud();if(Math.random()<.3)setTimeout(event,700)}
+function event(){if(S.over)return;const list=EV.filter((x,i)=>!S.seen.has(i)&&!(x.not||[]).includes(S.me)&&(!x.only||x.only.includes(S.me)));if(!list.length)return;
+ const ev=rnd(list);S.seen.add(EV.indexOf(ev));S.busy=1;$('#ov').className='dim';
+ $('#ov').innerHTML=`<div class="glass" style="max-width:420px;text-align:center"><div style="font-size:48px">${ev.e}</div><p><b>${ev.t}</b></p><div class="btns" style="justify-content:center">${ev.c.map((c,i)=>`<button onclick="evc(${EV.indexOf(ev)},${i})">${c[0]}</button>`).join('')}</div></div>`}
+function evc(ei,ci){const ev=EV[ei],[t,o]=ev.c[ci];apply(o);S.log.unshift(`${S.h}:00 — ${ev.e} ${t}`);$('#ov').innerHTML='';$('#ov').className='';S.busy=0;S.sig=''}
+function dinner(){S.over=1;S.busy=1;toast('🍽️ 21:00 — вся семья идёт на ужин в столовую!');
+ const tiles=RT.dining.filter(([x,y])=>Math.abs(y-7.5)<2.5);ALL.forEach((id,i)=>{const e=E[id];if(e.f===0){e.f=1;e.x=2.6;e.y=17.5}if(id!==S.me){e.busy=0;e.wait=99;go(e,'dining',tiles[i%tiles.length])}});
+ fade(()=>{const me=E[S.me];me.f=1;const t=tiles[6%tiles.length];me.x=t[0];me.y=t[1];me.path=[];setFloor(1);LA.set(me.x,.5,me.y);CAMS.dist=13});setTimeout(end,9000)}
 function qDone(){return Q[S.me].s.filter(([k,,n])=>(S.q[k]||0)>=n).length}
-function go(r){S.room=r;const p=ppl(r);if(p.length)S.say=[p[0],rnd(P[p[0]].say)];else S.say=null;render()}
-function bar(v){return `<span class="bar"><i style="width:${v}%"></i></span>`}
-function render(){
- const me=P[S.me],here=ppl(S.room);
- let btns='';
- allActions().forEach((a,i)=>{
-  if(!a.r.includes(S.room))return;
-  const tired=a.e<0&&S.en+a.e<0;
-  if(a.w){targets(a.w).filter(id=>!(a.once&&S.gifted.has(id))).forEach(id=>btns+=`<button ${tired?'disabled':''} onclick="act(${i},'${id}')">${fill(a.t,id)}</button>`)}
-  else btns+=`<button ${tired?'disabled':''} onclick="act(${i})">${a.t}${tired?' (нет сил)':''}</button>`;
- });
- $('#app').innerHTML=`
- <div class="top card"><div><b style="font-size:20px">${me.e} ${me.n}</b> <span style="color:var(--mute)">· ${me.r}</span></div>
- <div class="stat"><span>🕐 ${S.h}:00</span><span>⚡ ${bar(S.en)}</span><span>😊 ${bar(S.mo)}</span></div></div>
- <div class="grid">
-  <div>
-   <div class="card"><h2>🏠 Дом Саджая <small style="color:var(--mute);font-weight:400">— нажмите на комнату, чтобы перейти</small></h2>
-   ${[1,2,3].map(f=>`<div class="fl">${f} этаж</div><div class="house">${Object.entries(ROOMS).filter(r=>r[1][2]===f).map(([k,[i,n]])=>`<div class="room ${k===S.room?'here':''}" onclick="go('${k}')"><div class="rn">${i} ${n}</div><div class="ppl">${k===S.room?me.e:''}${ppl(k).map(x=>P[x].e).join('')}</div></div>`).join('')}</div>`).join('')}</div>
-   <div class="scene sec"><svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">${SCENE[S.room]}</svg><div class="actors">${[me.e+'<sup>вы</sup>',...here.map(x=>P[x].e)].map(e=>`<span>${e}</span>`).join('')}</div></div>
-   <div class="card sec"><h2>${ROOMS[S.room][0]} ${ROOMS[S.room][1]}${here.length?': '+here.map(x=>P[x].n).join(', '):' (никого)'}</h2>
-   ${S.say&&here.includes(S.say[0])?`<div class="say">${P[S.say[0]].e} <b>${P[S.say[0]].n}:</b> «${S.say[1]}»</div>`:''}
-   <div class="btns">${btns||'<i style="color:var(--mute)">Здесь нечего делать, перейдите в другую комнату.</i>'}</div></div>
-  </div>
-  <div>
-   <div class="card q"><h2>🎯 ${Q[S.me].t}</h2>${Q[S.me].s.map(([k,t,n])=>{const v=Math.min(S.q[k]||0,n);return `<div class="${v>=n?'done':''}">${v>=n?'✅':'⬜'} ${t} (${v}/${n})</div>`}).join('')}</div>
-   <div class="card sec"><h2>❤️ Отношения</h2><div class="rels">${ALL.filter(x=>x!==S.me).map(x=>`<span>${P[x].e} ${P[x].n}</span><span>${bar(S.rel[x])}</span>`).join('')}</div></div>
-   <div class="card sec"><h2>📜 Что происходит</h2><div class="log">${S.log.slice(0,10).map(l=>`<div>${l}</div>`).join('')}</div></div>
-  </div>
- </div>
- <p style="text-align:center"><button onclick="menu()">↩ Сменить персонажа</button></p>`;
-}
-function end(){
- const me=P[S.me],qs=Q[S.me].s,d=qDone();
- const others=ALL.filter(x=>x!==S.me),avg=others.reduce((s,x)=>s+S.rel[x],0)/others.length;
- const score=Math.round(d/qs.length*50+avg*.3+S.mo*.2);
- const title=score>=85?'🏆 Сердце семьи Саджая':score>=70?'🌟 Лучший день в году':score>=55?'😊 Хорошая суббота':score>=40?'🙂 Обычный денёк':'😅 Ну, бывает…';
- const best=others.reduce((a,b)=>S.rel[a]>=S.rel[b]?a:b);
- const lines=[];
- if(S.q.cook>=2)lines.push('На столе мамины хинкали. Все тянутся за добавкой.');
- if(S.q.bbq>=2)lines.push('Папин шашлык удался. Тимур съел пять шампуров.');
- if(S.q.art>=2)lines.push('На стене висит картина Евы «Семья Саджая». Мама прослезилась.');
- if(S.q.poem>=1)lines.push('Ева рассказала стихотворение без единой ошибки.');
- if(S.q.bunny)lines.push('Мия сидит за столом в обнимку с Бусей.');
- if(S.q.tt>=2)lines.push('Ева и Мия показывают всем свой новый TikTok. Уже 10 000 просмотров!');
- if(S.q.gift>=3)lines.push('Младшие не отходят от Сони и хвастаются подарками.');
- if(S.q.chat>=2)lines.push('Тимур весь ужин улыбается в телефон. Кажется, у него свидание!');
- if(S.q.proj>=2)lines.push('Тимур рассказывает, сколько семья тратит на конфеты. Мия делает вид, что не слышит.');
- if(S.q.fifa>=2)lines.push(S.me==='leo'?'Лео всем рассказывает, как обыграл Тимура.':'Тимур защитил титул чемпиона FIFA.');
- if(S.q.fix>=2)lines.push('Кран на кухне больше не капает. Папа — герой!');
- if(S.q.goal>=5)lines.push('Лео забил 5 голов. Ваза… об этом лучше не говорить.');
- if(!lines.length)lines.push('Все устали, но довольны. Дома тепло и шумно.');
- $('#app').innerHTML=`<div class="card end pop" style="max-width:620px;margin:20px auto;text-align:center">
- <div style="font-size:54px">🍽️</div><h2 style="font-size:24px">21:00 — семейный ужин в столовой</h2>
- <p>Вся семья Саджая собралась за большим столом: ${ALL.map(x=>P[x].e).join(' ')}</p>
- ${lines.map(l=>`<p>• ${l}</p>`).join('')}
- <p style="margin-top:16px">${me.e} <b>${me.n}</b>: квестов выполнено ${d} из ${qs.length}, ближе всех сегодня ${P[best].e} ${P[best].n}</p>
- <h2 style="font-size:26px;margin-top:14px">${title}</h2><p>Счёт: <b>${score}</b> / 100</p>
- <div class="btns" style="justify-content:center"><button class="main" onclick="start('${S.me}')">Сыграть ещё раз</button><button onclick="menu()">Другой персонаж</button></div></div>`;
-}
-function menu(){
- $('#app').innerHTML=`<h1>🏡 Семья Саджая</h1>
- <p class="sub">Суббота. В 21:00 вся семья соберётся на праздничный ужин. До этого у каждого есть свои дела, планы и маленькие мечты. Выберите, за кого играть, и проживите этот день: ходите по дому, общайтесь с родными, выполняйте задания и попробуйте сделать этот день лучшим в году!</p>
- <div class="chars">${ALL.map(id=>`<div class="card ch" onclick="start('${id}')"><div class="em">${P[id].e}</div><b>${P[id].n}</b><div style="color:var(--acc);font-weight:600">${P[id].r}</div><small>🎯 ${Q[id].t}: ${Q[id].s.map(s=>s[1].toLowerCase()).join(', ')}</small></div>`).join('')}</div>`;
-}
-menu();
+function modal(h){$('#ov').className='dim';$('#ov').innerHTML=`<div class="glass">${h}<p style="text-align:center;margin:14px 0 0"><button class="main" onclick="$('#ov').innerHTML='';$('#ov').className=''">Закрыть</button></p></div>`}
+function showQ(){modal(`<h2>🎯 ${Q[S.me].t}</h2>${Q[S.me].s.map(([k,t,n])=>{const v=Math.min(S.q[k]||0,n);return `<div class="${v>=n?'done':''}" style="margin:6px 0">${v>=n?'✅':'⬜'} ${t} (${v}/${n})</div>`}).join('')}`)}
+function showRel(){const bar=v=>`<span class="bar" style="width:100px"><i style="width:${v}%"></i></span>`;modal(`<h2>❤️ Отношения</h2><div class="rels">${ALL.filter(x=>x!==S.me).map(x=>`<span>${P[x].e} ${P[x].n}</span><span>${bar(S.rel[x])}</span>`).join('')}</div>`)}
+function showLog(){modal(`<h2>📜 Дневник дня</h2><div class="log">${S.log.map(l=>`<div>${l}</div>`).join('')}</div>`)}
+function end(){S.done=1;const me=P[S.me],qs=Q[S.me].s,d=qDone(),others=ALL.filter(x=>x!==S.me),avg=others.reduce((s,x)=>s+S.rel[x],0)/others.length;
+ const score=Math.round(d/qs.length*50+avg*.3+S.mo*.2),title=score>=85?'🏆 Сердце семьи Саджая':score>=70?'🌟 Лучший день в году':score>=55?'😊 Хорошая суббота':score>=40?'🙂 Обычный денёк':'😅 Ну, бывает…';
+ const best=others.reduce((a,b)=>S.rel[a]>=S.rel[b]?a:b),L=[];
+ if(S.q.cook>=2)L.push('На столе мамины хинкали. Все тянутся за добавкой.');if(S.q.bbq>=2)L.push('Папин шашлык удался. Тимур съел пять шампуров.');
+ if(S.q.art>=2)L.push('На стене висит картина Евы «Семья Саджая». Мама прослезилась.');if(S.q.poem>=1)L.push('Ева рассказала стихотворение без единой ошибки.');
+ if(S.q.bunny)L.push('Мия сидит за столом в обнимку с Бусей.');if(S.q.tt>=2)L.push('Ева и Мия показывают всем свой новый TikTok — уже 10 000 просмотров!');
+ if(S.q.gift>=3)L.push('Младшие не отходят от Сони и хвастаются подарками.');if(S.q.chat>=2)L.push('Тимур весь ужин улыбается в телефон. Кажется, у него свидание!');
+ if(S.q.proj>=2)L.push('Тимур рассказывает, сколько семья тратит на конфеты. Мия делает вид, что не слышит.');
+ if(S.q.fifa>=2)L.push(S.me==='leo'?'Лео всем рассказывает, как обыграл Тимура.':'Тимур защитил титул чемпиона FIFA.');if(S.q.fix>=2)L.push('Кран на кухне больше не капает. Папа — герой!');
+ if(S.q.goal>=5)L.push('Лео забил 5 голов. Ваза… об этом лучше не говорить.');if(!L.length)L.push('Все устали, но довольны. Дома тепло и шумно.');
+ $('#hud').style.display='none';$('#panel').style.display='none';$('#ov').className='dim';
+ $('#ov').innerHTML=`<div class="glass" style="text-align:center;max-width:620px"><div style="font-size:50px">🍽️</div><h2>21:00 — семейный ужин в столовой</h2><p>Вся семья Саджая за большим столом: ${ALL.map(x=>P[x].e).join(' ')}</p>${L.map(l=>`<p>• ${l}</p>`).join('')}
+ <p>${me.e} <b>${me.n}</b>: заданий выполнено ${d} из ${qs.length}, ближе всех сегодня ${P[best].e} ${P[best].n}</p><h2 style="font-size:26px">${title}</h2><p>Счёт: <b>${score}</b> / 100</p>
+ <div class="btns" style="justify-content:center"><button class="main" onclick="location.reload()">Сыграть ещё раз</button></div></div>`}
+function menu(){$('#ov').className='';$('#ov').innerHTML=`<div class="glass"><h1>🏡 Семья Саджая</h1>
+ <p class="sub">Суббота в большом доме. В 21:00 вся семья соберётся на ужин в столовой, а до этого у каждого свои дела и маленькие мечты. Выберите героя, ходите по трём этажам, общайтесь с родными и сделайте этот день лучшим в году!</p>
+ <div class="chars">${ALL.map(id=>`<div class="ch" onclick="start('${id}')"><div class="em">${P[id].e}</div><b>${P[id].n}</b><div style="color:var(--acc);font-weight:600">${P[id].r}</div><small>🎯 ${Q[id].t}: ${Q[id].s.map(s=>s[1].toLowerCase()).join(', ')}</small></div>`).join('')}</div>
+ <p class="hint" style="text-align:center;margin:12px 0 0">Управление: стрелки / WASD или нажатие на пол · мышь/палец — крутить камеру · колесо/щипок — приблизить · Q/E — поворот</p></div>`}
+menu();requestAnimationFrame(loop);
 </script>
 </body>
 </html>
