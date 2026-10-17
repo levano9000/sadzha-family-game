@@ -189,15 +189,6 @@ const SCENE={
  <path d="M300 10H400V135H300Z" fill="#dfe8ee"/><rect x="300" y="10" width="100" height="125" fill="#fff" opacity=".4"/>${[296,340,384].map(x=>`<rect x="${x}" y="6" width="14" height="130" fill="#4c4749"/>`).join('')}
  <rect x="160" y="42" width="110" height="62" rx="2" fill="#141414"/><rect x="166" y="48" width="98" height="50" fill="#26344a"/><path d="M180 90l15-20 15 12 20-26 20 34Z" fill="#3e5a7e"/>
  <rect x="150" y="116" width="130" height="16" fill="#5a5a5a"/><rect x="200" y="110" width="26" height="6" rx="2" fill="#eee"/>`,
- kitchen:`<rect width="400" height="180" fill="#f1efeb"/>${FLOOR}<rect x="70" y="140" width="260" height="36" fill="none" stroke="#2d2b28" stroke-width="3"/>
- <rect x="0" y="12" width="140" height="56" fill="#fff" stroke="#d9c29a"/><path d="M35 12V68M70 12V68M105 12V68" stroke="#d9c29a"/><rect x="0" y="78" width="140" height="22" fill="#e9e5df"/>
- <rect x="0" y="100" width="140" height="35" fill="#fff" stroke="#d9c29a"/><path d="M47 100V135M94 100V135" stroke="#d9c29a"/><rect x="20" y="92" width="22" height="8" rx="2" fill="#bbb"/>
- <rect x="350" y="12" width="50" height="123" fill="#fff" stroke="#d9c29a"/><rect x="358" y="55" width="34" height="26" fill="#333"/>
- <rect x="175" y="16" width="100" height="110" fill="#e1edf3"/><path d="M225 16V126" stroke="#fff" stroke-width="3"/><rect x="160" y="12" width="18" height="118" fill="#3f8a85"/><rect x="272" y="12" width="18" height="118" fill="#3f8a85"/>
- ${CHAND(225,30,'#b8b8b8')}
- ${[[160,125],[290,125]].map(([x,y])=>`<rect x="${x-14}" y="${y-22}" width="28" height="30" rx="10" fill="#3f7f78"/><path d="M${x-10} ${y+8}l-4 18M${x+10} ${y+8}l4 18" stroke="#c8a45a" stroke-width="2"/>`).join('')}
- <ellipse cx="225" cy="122" rx="62" ry="13" fill="#fafafa" stroke="#bbb"/><path d="M180 120q20 4 30-3M230 126q15-6 35 0" stroke="#bdbdbd" fill="none"/><rect x="212" y="134" width="26" height="22" fill="#a9824f"/>
- ${[[195,140],[255,140]].map(([x,y])=>`<rect x="${x-14}" y="${y-8}" width="28" height="26" rx="10" fill="#4a948c"/><path d="M${x-10} ${y+18}l-3 18M${x+10} ${y+18}l3 18" stroke="#c8a45a" stroke-width="2"/>`).join('')}`,
  girls:`<rect width="400" height="180" fill="#b8bcbf"/><rect y="128" width="400" height="52" fill="#b5763f"/><path d="M0 145H400M0 162H400M80 128V145M200 145V162M300 128V145M140 162V180" stroke="#9a6233"/>
  <rect x="0" y="0" width="240" height="108" fill="#2f5c88"/><rect x="0" y="0" width="28" height="108" fill="#fff"/><path d="M5 0V108M12 0V108M19 0V108" stroke="#222" stroke-width="3"/>
  ${[45,140].map(x=>`<rect x="${x}" y="18" width="70" height="80" fill="#f5f5f5"/>${[0,1,2,3,4,5,6,7,8,9].map(i=>`<path d="M${x} ${24+i*7}H${x+70}" stroke="#ddd"/>`).join('')}`).join('')}
@@ -224,6 +215,106 @@ const SCENE={
  <rect x="170" y="80" width="10" height="45" fill="#7b5a3a"/><circle cx="175" cy="70" r="28" fill="#4f9a45"/><rect x="250" y="88" width="90" height="40" fill="none" stroke="#fff" stroke-width="4"/><path d="M250 88l10 10h70l10-10M260 98v30M330 98v30" stroke="#fff" opacity=".6"/>
  <rect x="200" y="122" width="34" height="10" fill="#333"/><path d="M204 132l-4 14M230 132l4 14" stroke="#333" stroke-width="2"/><path d="M207 118q3-8 0-14M217 118q3-8 0-14" stroke="#aaa" fill="none"/>`
 };
+// Кухня-столовая: перспектива от входа, как на фото
+SCENE.kitchen=(()=>{
+ const VX=200,VY=85,ZB=.818,D=z=>z/(z+1);
+ const pt=(x,y,z)=>{const d=D(z);return [x+(VX-x)*d,y+(VY-y)*d]};
+ const P=(x,y,z)=>pt(x,y,z).map(v=>v.toFixed(1)).join(',');
+ const poly=(a,f,x='')=>`<polygon points="${a.map(v=>P(...v)).join(' ')}" fill="${f}" ${x}/>`;
+ const line=(a,b,c,w=.6)=>`<line x1="${pt(...a)[0]}" y1="${pt(...a)[1]}" x2="${pt(...b)[0]}" y2="${pt(...b)[1]}" stroke="${c}" stroke-width="${w}"/>`;
+ const wallQ=(x,y1,y2,z1,z2,f,e='')=>poly([[x,y1,z1],[x,y1,z2],[x,y2,z2],[x,y2,z1]],f,e);
+ const flatQ=(x1,x2,y,z1,z2,f,e='')=>poly([[x1,y,z1],[x2,y,z1],[x2,y,z2],[x1,y,z2]],f,e);
+ const GOLD='#c9a35b';
+ let o=`<defs>
+ <linearGradient id="kFl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#faf9f6"/><stop offset="1" stop-color="#e7e3dc"/></linearGradient>
+ <linearGradient id="kWl" x1="0" x2="1"><stop offset="0" stop-color="#e4e0d9"/><stop offset="1" stop-color="#efece7"/></linearGradient>
+ <linearGradient id="kWr" x1="1" x2="0"><stop offset="0" stop-color="#e2ded7"/><stop offset="1" stop-color="#eeebe6"/></linearGradient>
+ <linearGradient id="kCl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6f5f2"/><stop offset="1" stop-color="#ebe9e5"/></linearGradient>
+ <linearGradient id="kSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe3ef"/><stop offset=".7" stop-color="#eef5f8"/><stop offset="1" stop-color="#f7f2e6"/></linearGradient>
+ <linearGradient id="kTeal" x1="0" x2="1"><stop offset="0" stop-color="#2f6d68"/><stop offset=".35" stop-color="#4f9690"/><stop offset=".6" stop-color="#3a7f79"/><stop offset="1" stop-color="#2a625d"/></linearGradient>
+ <linearGradient id="kVel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5aa49a"/><stop offset=".55" stop-color="#3c837a"/><stop offset="1" stop-color="#2a6159"/></linearGradient>
+ <linearGradient id="kRef" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+ <linearGradient id="kBeam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff8e0" stop-opacity=".5"/><stop offset="1" stop-color="#fff8e0" stop-opacity="0"/></linearGradient>
+ <linearGradient id="kWood" x1="0" x2="1"><stop offset="0" stop-color="#8a6236"/><stop offset=".45" stop-color="#c4955c"/><stop offset="1" stop-color="#7a552e"/></linearGradient>
+ <radialGradient id="kTop" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e9e7e3"/></radialGradient>
+ <radialGradient id="kGlow"><stop offset="0" stop-color="#fff6d0"/><stop offset=".4" stop-color="#fff2c0" stop-opacity=".6"/><stop offset="1" stop-color="#fff2c0" stop-opacity="0"/></radialGradient>
+ <radialGradient id="kVig" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#3a2a1f" stop-opacity=".22"/></radialGradient>
+ <filter id="kBl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.2"/></filter>
+ <clipPath id="kTc"><ellipse cx="200" cy="111.5" rx="38" ry="9"/></clipPath>
+ </defs>`;
+ // потолок, пол, стены
+ o+=poly([[0,0,0],[400,0,0],[400,0,ZB],[0,0,ZB]],'url(#kCl)');
+ o+=poly([[0,180,0],[400,180,0],[400,180,ZB],[0,180,ZB]],'url(#kFl)');
+ o+=poly([[70,180,.1],[330,180,.1],[330,180,.72],[70,180,.72]],'#2b2a28');
+ o+=poly([[80,180,.13],[320,180,.13],[320,180,.67],[80,180,.67]],'url(#kFl)');
+ o+=poly([[84,180,.14],[316,180,.14],[316,180,.65],[84,180,.65]],'none',`stroke="${GOLD}" stroke-width=".5"`);
+ for(let x=-300;x<=700;x+=100)o+=line([x,180,0],[x,180,ZB],'#d9d4cc',.4);
+ [.08,.2,.34,.5,.7].forEach(z=>o+=line([0,180,z],[400,180,z],'#ddd8d0',.4));
+ // отражения окон и луч света на полу
+ o+=`<polygon points="120,137 181,137 186,178 104,178" fill="url(#kRef)" opacity=".55"/><polygon points="219,137 280,137 296,178 214,178" fill="url(#kRef)" opacity=".55"/>`;
+ o+=poly([[0,0,ZB],[0,180,ZB],[0,180,0],[0,0,0]],'url(#kWl)')+poly([[400,0,ZB],[400,180,ZB],[400,180,0],[400,0,0]],'url(#kWr)');
+ o+=wallQ(0,0,6,0,ZB,'#f2f0ec')+wallQ(400,0,6,0,ZB,'#f2f0ec');
+ // задняя стена с окнами (рисуем в масштабе)
+ const k=1-D(ZB),bx=200-200*k,by=VY-VY*k;
+ o+=`<g transform="translate(${bx.toFixed(1)},${by.toFixed(1)}) scale(${k.toFixed(3)})">
+ <rect width="400" height="180" fill="#eceae5"/><rect y="176" width="400" height="4" fill="#d9d4cc"/>
+ ${[52,232].map(x=>`<rect x="${x}" y="16" width="116" height="152" fill="url(#kSky)"/><path d="M${x+58} 16V168M${x} 56H${x+116}" stroke="#fff" stroke-width="4"/><rect x="${x}" y="16" width="116" height="152" fill="none" stroke="#fff" stroke-width="5"/>
+ <path d="M${x+8} 30q8 40 0 80t6 58M${x+30} 26q-6 50 2 90t-2 52M${x+80} 28q6 45-2 85t4 55M${x+104} 26q-8 50 0 92" stroke="#c9d6dd" stroke-width="2" fill="none" opacity=".7"/>`).join('')}
+ <rect x="40" y="6" width="320" height="168" fill="#fff" opacity=".42"/>
+ <path d="M60 6v168M90 6v168M120 6v168M150 6v168M250 6v168M280 6v168M310 6v168M340 6v168" stroke="#fff" stroke-width="3" opacity=".5"/>
+ <rect x="0" y="0" width="400" height="7" fill="#d9d5cf"/><rect x="14" y="7" width="40" height="171" fill="url(#kTeal)"/><rect x="346" y="7" width="40" height="171" fill="url(#kTeal)"/>
+ <path d="M24 7v171M34 7v171M44 7v171M356 7v171M366 7v171M376 7v171" stroke="#22524e" stroke-width="1.5" opacity=".6"/>
+ <rect x="194" y="70" width="12" height="22" rx="2" fill="#f4f1ea" stroke="#ddd"/><circle cx="200" cy="66" r="10" fill="url(#kGlow)"/>
+ </g>`;
+ o+=`<polygon points="120,40 181,40 205,170 98,170" fill="url(#kBeam)" opacity=".5"/><polygon points="219,40 280,40 305,170 200,170" fill="url(#kBeam)" opacity=".4"/>`;
+ // встроенные светильники
+ [[120,.15],[280,.15],[120,.45],[280,.45],[200,.3]].forEach(([x,z])=>{const[a,b]=pt(x,0,z);o+=`<ellipse cx="${a}" cy="${b+.8}" rx="${3.4*(1-D(z))}" ry="${1.1*(1-D(z))}" fill="#fffbe8" stroke="#ddd" stroke-width=".3"/>`});
+ // левая стена: верхние шкафы, фартук, столешница, нижние шкафы
+ o+=wallQ(0,66,104,0,ZB,'#efede8')+`<path d="M${P(0,74,.05).replace(',',' ')}L${P(0,98,.5).replace(',',' ')}M${P(0,70,.3).replace(',',' ')}L${P(0,100,.7).replace(',',' ')}" stroke="#d6d1c9" stroke-width=".7" fill="none"/>`;
+ o+=flatQ(0,22,66,0,ZB,'#e4e0d8')+wallQ(22,4,66,0,ZB,'#fbfaf8');
+ [.1,.22,.36,.52,.7].forEach(z=>o+=line([22,4,z],[22,66,z],'#ddd3bf',.7));
+ for(let i=0;i<14;i++){const z=.02+i*.057;o+=line([22,8,z],[22,62,z],'#efebe4',.5)}
+ o+=line([22,66,0],[22,66,ZB],GOLD,1.2)+line([22,4,0],[22,4,ZB],GOLD,.8);
+ o+=flatQ(0,32,104,0,ZB,'#ece9e3')+wallQ(32,104,108,0,ZB,'#ddd8cf')+wallQ(32,108,174,0,ZB,'#fbfaf8')+wallQ(32,174,180,0,ZB,'#d8d2c8');
+ [.12,.26,.42,.6].forEach(z=>o+=line([32,108,z],[32,174,z],'#ddd3bf',.7));
+ o+=line([32,108,0],[32,108,ZB],GOLD,1.2);
+ o+=flatQ(8,26,104.2,.22,.34,'#c7cbcf')+line([4,104,.28],[4,90,.28],'#9aa0a6',1.6)+line([4,90,.28],[12,92,.28],'#9aa0a6',1.6);
+ {const[a,b]=pt(10,104,.62);o+=`<rect x="${a-5}" y="${b-8}" width="10" height="8" rx="2" fill="#f0ece6" stroke="#ccc" stroke-width=".4"/><rect x="${a+7}" y="${b-10}" width="5" height="10" rx="1.5" fill="#4a4a4a"/>`}
+ // правая стена: высокая колонна с духовкой, столешница
+ o+=wallQ(400,66,104,.24,ZB,'#efede8')+flatQ(380,400,62,.24,ZB,'#e4e0d8')+wallQ(380,4,62,.24,ZB,'#fbfaf8')+line([380,62,.24],[380,62,ZB],GOLD,1.2);
+ o+=flatQ(368,400,104,.24,ZB,'#ece9e3')+wallQ(368,104,108,.24,ZB,'#ddd8cf')+wallQ(368,108,174,.24,ZB,'#fbfaf8')+wallQ(368,174,180,.24,ZB,'#d8d2c8');
+ [.36,.5,.66].forEach(z=>o+=line([368,108,z],[368,174,z],'#ddd3bf',.7)+line([380,4,z],[380,62,z],'#ddd3bf',.7));
+ o+=line([368,108,.24],[368,108,ZB],GOLD,1.2);
+ o+=wallQ(376,4,176,0,.24,'#fbfaf8')+flatQ(376,400,4,0,.24,'#f3f1ec')+line([376,4,.24],[376,176,.24],GOLD,1)+line([376,4,.12],[376,176,.12],'#ddd3bf',.7);
+ o+=wallQ(376,70,108,.04,.2,'#2c2d2f')+wallQ(376,74,92,.06,.18,'#3d4a55')+line([376,96,.06],[376,96,.18],'#888',1.2);
+ {const[a,b]=pt(388,104,.5);o+=`<path d="M${a-5} ${b}q5-9 10 0Z" fill="#e8e3da"/><ellipse cx="${a}" cy="${b}" rx="5" ry="1" fill="#ccc"/>`}
+ // стулья
+ const chair=(x,y,s,show)=>`<g transform="translate(${x} ${y}) scale(${s})">
+  <ellipse cx="0" cy="25" rx="17" ry="3" fill="#000" opacity=".16" filter="url(#kBl)"/>
+  <path d="M-10 2L-13 24M10 2L13 24M-7 3L-8 20M7 3L8 20" stroke="${GOLD}" stroke-width="1.4" stroke-linecap="round"/>
+  ${show?'<ellipse cx="0" cy="1" rx="14" ry="4.5" fill="#2f6e66"/>':''}
+  <path d="M-15 2C-17 -20 -11 -29 0 -29C11 -29 17 -20 15 2C9 6 -9 6 -15 2Z" fill="url(#kVel)"/>
+  <path d="M-9 -2C-10 -16 -7 -24 -3 -26M-3 0C-3.5 -14 -2 -24 0 -27M3 0C3.5 -14 2 -24 0 -27M9 -2C10 -16 7 -24 3 -26" stroke="#26584f" stroke-width=".8" fill="none" opacity=".7"/>
+  <path d="M-13 -12C-12 -24 -6 -28 0 -28" stroke="#fff" stroke-width="1.4" fill="none" opacity=".25" stroke-linecap="round"/>
+ </g>`;
+ o+=chair(176,118,.6,0)+chair(224,118,.6,0);
+ // стол: мраморная столешница на деревянной ножке
+ o+=`<ellipse cx="200" cy="151" rx="30" ry="4" fill="#000" opacity=".18" filter="url(#kBl)"/>
+ <path d="M192 115L188 150Q200 153 212 150L208 115Z" fill="url(#kWood)"/>
+ <path d="M194 116v34M197 116v35M200 116v35M203 116v35M206 116v34" stroke="#6b4a26" stroke-width=".5" opacity=".6"/>
+ <ellipse cx="200" cy="114" rx="38" ry="9" fill="#d3cec6"/>
+ <ellipse cx="200" cy="111.5" rx="38" ry="9" fill="url(#kTop)"/>
+ <g clip-path="url(#kTc)" fill="none" stroke-linecap="round"><path d="M165 108q12 4 20 1t18 4 22-2M180 116q10-5 22-2t26-3M210 104q4 6 14 7M172 112q6-1 10 3" stroke="#a9a9a9" stroke-width=".6"/><path d="M190 110q8 3 16 0" stroke="#c4c4c4" stroke-width="1.2" opacity=".6"/></g>
+ <ellipse cx="190" cy="108" rx="14" ry="2.5" fill="#fff" opacity=".7"/>
+ <ellipse cx="207" cy="111" rx="5" ry="1.6" fill="#f2efe9" stroke="#d6d0c6" stroke-width=".4"/><ellipse cx="207" cy="110.8" rx="3.6" ry="1" fill="#d39a3c"/>`;
+ o+=chair(170,139,.82,1)+chair(232,139,.82,1);
+ // люстра
+ o+=`<path d="M200 26V44" stroke="#9aa0a6" stroke-width=".8"/><circle cx="200" cy="48" r="20" fill="url(#kGlow)" opacity=".8"/>
+ <ellipse cx="200" cy="50" rx="15" ry="3" fill="none" stroke="#b9bec4" stroke-width="1.2"/><path d="M200 44v9" stroke="#b9bec4" stroke-width="2"/>
+ ${[-15,-10,-5,0,5,10,15].map(d=>{const y=50+(Math.abs(d)<8?2:0);return `<path d="M${200+d} ${y}v-6" stroke="#cfd3d8" stroke-width="1.2"/><circle cx="${200+d}" cy="${y-7}" r="1.6" fill="#fffbe6"/><circle cx="${200+d}" cy="${y-7}" r="4" fill="url(#kGlow)"/>`}).join('')}`;
+ o+=`<rect width="400" height="180" fill="url(#kVig)"/>`;
+ return o;
+})();
 let S;
 const $=s=>document.querySelector(s);
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
