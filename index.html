@@ -60,21 +60,21 @@ button.main{background:var(--acc);color:#fff;font-weight:700}
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const ROOMS={hall:['🚪','Прихожая',1],living:['🔥','Гостиная с камином',1],tv:['📺','ТВ-комната',1],kitchen:['🍽️','Кухня-столовая',1],yard:['🌳','Двор',1],girls:['🎀','Детская Евы и Мии',2],boys:['⚽','Комната Тимура и Лео',2],bed:['🛏️','Спальня родителей',2]};
+const ROOMS={hall:['🚪','Прихожая',1],living:['🔥','Каминная',1],tv:['🎮','Кинотеатр',1],kitchen:['🍳','Кухня',1],dining:['🍽️','Столовая',1],study:['💼','Кабинет',1],garden:['🪴','Зимний сад',1],yard:['🌳','Веранда и двор',1],boys:['🎧','Детская Тимура',2],girls:['🎀','Детская Евы и Мии',2],leor:['⚽','Детская Лео',2],bed:['🛏️','Спальня родителей',2],sroom:['👱‍♀️','Комната Сони',3],play:['🧩','Игровая зона',3]};
 const P={
- an:{n:'Анастасия',r:'Мама',e:'👩',fav:{kitchen:4,bed:3,living:2,girls:1,boys:1},
+ an:{n:'Анастасия',r:'Мама',e:'👩',fav:{kitchen:4,study:3,garden:2,living:2,bed:1,girls:1},
   say:['Кто опять оставил носки в гостиной?','Давайте сначала уроки, потом гаджеты.','Как ты себя сейчас чувствуешь?','Я вас всех очень люблю. Но тишины хочу больше.','Ужин в девять, никто не опаздывает!']},
- lev:{n:'Леван',r:'Папа',e:'🧔',fav:{tv:3,yard:4,living:3,kitchen:1},
+ lev:{n:'Леван',r:'Папа',e:'🧔',fav:{study:3,yard:4,living:3,tv:2,dining:1},
   say:['Кто со мной в футбол?','Кран сам себя не починит…','Вечером будет шашлык. Наверное.','Где мой пульт?!','Семья Саджая — команда!']},
- so:{n:'Соня',r:'Старшая дочь · в гостях',e:'👱‍♀️',fav:{living:4,kitchen:3,yard:2,hall:1},
+ so:{n:'Соня',r:'Старшая дочь · в гостях',e:'👱‍♀️',fav:{living:4,kitchen:3,sroom:2,garden:1,dining:1},
   say:['Как же я по вам соскучилась!','Мелкие, я вам подарки привезла!','Мам, давай помогу с ужином.','Тимур, ты так вырос! С кем это ты переписываешься?','Дома всё как раньше. Так хорошо!']},
- ti:{n:'Тимур',r:'Старший сын · 15 лет',e:'🧑',fav:{tv:4,boys:3,yard:2,kitchen:1},
+ ti:{n:'Тимур',r:'Старший сын · 15 лет',e:'🧑',fav:{tv:4,boys:4,yard:2,kitchen:1},
   say:['Лео, ты опять проиграешь, сразу говорю.','Мам, а есть что-нибудь поесть?','Не, я не с девчонкой переписываюсь. Ну… может.','Экономика — это вообще-то интересно. Наверное.','Не смотри в мой телефон!']},
- ev:{n:'Ева',r:'Средняя дочь',e:'👧',fav:{girls:4,yard:2,living:2},
+ ev:{n:'Ева',r:'Средняя дочь',e:'👧',fav:{girls:5,play:2,garden:2,living:1},
   say:['Мия, идём снимать TikTok!','Подпишись на наш TikTok, ну пожалуйста!','Этот тренд надо снять прямо сейчас!','«У лукоморья дуб зелёный…» а дальше как?','У нас уже почти тысяча подписчиков!']},
- mi:{n:'Мия',r:'Младшая дочь',e:'🧒',fav:{girls:4,living:3,kitchen:2,tv:1,bed:1},
+ mi:{n:'Мия',r:'Младшая дочь',e:'🧒',fav:{girls:5,play:3,living:2,kitchen:2},
   say:['А где мой Буся? Кто видел зайца Бусю?!','Ева, давай снимем TikTok!','Можно конфетку? Одну. Ну две.','Я звезда TikTok!','Смотри, какой я танец выучила!']},
- leo:{n:'Лео',r:'Младший сын',e:'👦',fav:{tv:4,yard:3,boys:2,living:1},
+ leo:{n:'Лео',r:'Младший сын',e:'👦',fav:{tv:4,play:3,yard:3,leor:2},
   say:['ГОООЛ!','Тимур, давай в FIFA! Я тебя сделаю.','Я не трогал вазу! Она сама.','Можно ещё пять минут поиграть в PlayStation?','Пап, смотри, какой финт!']}
 };
 const GROUP={kid:['so','ti','ev','mi','leo'],small:['mi','leo'],sis:['so','ev','mi'],par:['an','lev'],bro:['ti','leo']};
@@ -91,59 +91,60 @@ const Q={
 // Действия: t текст, r комнаты, w с кем, e энергия, m настроение, rl отношения с тем, с кем действие, rel {id:Δ}, q шаг квеста, p шанс неудачи, f что происходит при неудаче
 const A={
  an:[
-  {t:'📚 Уроки с: {n}',r:['girls','boys','kitchen'],w:['so','ti','ev','leo'],e:-15,rl:8,q:'hw',log:'Вы сделали уроки с {n}. Пятёрка обеспечена!'},
+  {t:'📚 Уроки с: {n}',r:['girls','boys','leor','study','kitchen'],w:['so','ti','ev','leo'],e:-15,rl:8,q:'hw',log:'Вы сделали уроки с {n}. Пятёрка обеспечена!'},
   {t:'🍲 Готовить ужин',r:['kitchen'],e:-15,m:5,q:'cook',log:'По дому пахнет хинкали. Все бегут к круглому столу.'},
-  {t:'🎧 Онлайн-консультация',r:['bed'],e:-10,m:8,log:'Вы помогли клиенту. Вы отличный психолог.'},
-  {t:'🍵 Чай в тишине',r:['kitchen','bed','yard'],e:15,m:15,q:'me',p:.5,log:'Целых 15 минут тишины. Блаженство.',f:{e:5,m:-5,log:'Только вы налили чай, как кто-то позвал: «Маааам!»'}},
-  {t:'📖 Сказка для: {n}',r:['girls','boys','bed'],w:'small',e:-5,m:5,rl:10,log:'{n} слушает сказку и почти засыпает.'}
+  {t:'🎧 Онлайн-консультация',r:['study'],e:-10,m:8,log:'Вы помогли клиенту. Вы отличный психолог.'},
+  {t:'🍵 Чай в тишине',r:['garden','kitchen','bed'],e:15,m:15,q:'me',p:.5,log:'Целых 15 минут тишины. Блаженство.',f:{e:5,m:-5,log:'Только вы налили чай, как кто-то позвал: «Маааам!»'}},
+  {t:'📖 Сказка для: {n}',r:['girls','leor','bed'],w:'small',e:-5,m:5,rl:10,log:'{n} слушает сказку и почти засыпает.'}
  ],
  lev:[
   {t:'🔧 Чинить кран',r:['kitchen'],e:-15,q:'fix',p:.3,log:'Ещё чуть-чуть, и кран будет как новый.',f:{m:8,log:'Вода ударила фонтаном! Все мокрые, но смеются.'}},
   {t:'⚽ Футбол с: {n}',r:['yard'],w:'kid',e:-15,m:10,rl:10,q:'ball',log:'Вы с {n} играете во дворе. Папа, как всегда, в воротах.'},
   {t:'🔥 Жарить шашлык',r:['yard'],e:-10,m:10,q:'bbq',log:'Угли готовы, мясо шипит. Соседи завидуют.'},
-  {t:'💼 Поработать',r:['kitchen','bed'],e:-10,m:-5,log:'Вы ответили на почту. Всё равно скучно.'},
-  {t:'🐴 Покатать на спине: {n}',r:['living','girls','boys','yard'],w:'small',e:-10,m:5,rl:12,log:'{n} верхом на папе-лошадке! Иго-го!'},
+  {t:'💼 Поработать в кабинете',r:['study'],e:-10,m:-5,log:'Вы ответили на почту. Всё равно скучно.'},
+  {t:'🐴 Покатать на спине: {n}',r:['living','girls','leor','play','yard'],w:'small',e:-10,m:5,rl:12,log:'{n} верхом на папе-лошадке! Иго-го!'},
   {t:'📺 Смотреть матч',r:['tv'],e:10,m:10,log:'Гол! Вы кричите на весь дом.'}
  ],
  so:[
   {t:'🎁 Подарок для: {n}',r:Object.keys(ROOMS),w:['ev','mi','leo','ti'],m:10,rl:15,q:'gift',once:1,log:'{n} в восторге от подарка и висит у вас на шее!'},
-  {t:'☕ По душам с мамой',r:['kitchen','bed','yard'],w:['an'],m:15,rl:15,q:'talk',log:'Вы с мамой поговорили обо всём: о работе, о жизни, о любви.'},
-  {t:'🥗 Помочь с ужином',r:['kitchen'],e:-10,m:5,rel:{an:6},q:'cook',log:'Вы нарезали салат. Совсем как раньше.'},
+  {t:'☕ По душам с мамой',r:['garden','kitchen','bed'],w:['an'],m:15,rl:15,q:'talk',log:'Вы с мамой поговорили обо всём: о работе, о жизни, о любви.'},
+  {t:'🥗 Помочь с ужином',r:['kitchen','dining'],e:-10,m:5,rel:{an:6},q:'cook',log:'Вы нарезали салат. Совсем как раньше.'},
   {t:'💇‍♀️ Заплести косички: {n}',r:['girls','living'],w:['ev','mi'],e:-5,rl:10,log:'{n} теперь с причёской как у принцессы.'},
   {t:'🗣️ Рассказать о взрослой жизни: {n}',r:Object.keys(ROOMS),w:'all',m:5,rl:8,log:'{n} слушает вас с открытым ртом.'},
-  {t:'🛋️ Утонуть в огромном диване',r:['living'],e:20,m:10,log:'Камин, тот самый диван… Дома лучше всего.'}
+  {t:'🛋️ Утонуть в огромном диване',r:['living'],e:20,m:10,log:'Камин, тот самый диван… Дома лучше всего.'},
+  {t:'🛏️ Полежать в своей старой комнате',r:['sroom'],e:25,m:12,log:'Третий этаж, ваша комната. Всё как в детстве.'}
  ],
  ti:[
   {t:'💬 Переписываться с девчонкой',r:Object.keys(ROOMS),m:12,q:'chat',p:.35,log:'Она ответила смайликом ❤️. Кажется, всё идёт хорошо!',f:{m:-8,rel:{leo:-5},log:'Лео подсмотрел в телефон и растрепал всем! «Тимур влюбился!»'}},
   {t:'🎮 FIFA против Лео',r:['tv'],w:['leo'],e:-5,m:10,rl:4,q:'fifa',p:.45,log:'Победа! Лео требует реванша.',f:{m:-8,log:'Лео забил на последней минуте… Обидно!'}},
   {t:'🎮 PlayStation одному',r:['tv'],e:-5,m:10,log:'Прошли сложный уровень.'},
-  {t:'📊 Проект по экономике',r:['boys','kitchen'],e:-15,m:-5,q:'proj',log:'Вы посчитали бюджет семьи Саджая. Больше всех на конфеты тратит Мия!'},
+  {t:'📊 Проект по экономике',r:['boys','study'],e:-15,m:-5,q:'proj',log:'Вы посчитали бюджет семьи Саджая. Больше всех на конфеты тратит Мия!'},
   {t:'💪 Тренировка',r:['yard'],e:-15,m:8,q:'train',log:'50 отжиманий и пробежка вокруг дома.'},
-  {t:'🛠️ Помочь папе',r:['kitchen','yard','hall','tv'],w:['lev'],e:-10,rl:12,log:'Папа доволен: «Вот это мужик!»'},
+  {t:'🛠️ Помочь папе',r:['study','yard','kitchen','tv'],w:['lev'],e:-10,rl:12,log:'Папа доволен: «Вот это мужик!»'},
   {t:'😜 Подразнить: {n}',r:Object.keys(ROOMS),w:'sis',m:6,rl:-6,log:'{n} кричит: «Маааам, Тимур дразнится!»'}
  ],
  ev:[
-  {t:'📱 Снимать TikTok с Мией',r:['girls','living','yard'],w:['mi'],e:-10,m:12,rl:10,q:'tt',p:.3,log:'Идеальный дубль! Видео улетает в рекомендации.',f:{m:-5,log:'В кадр влетел Лео с мячом. Дубль второй…'}},
+  {t:'📱 Снимать TikTok с Мией',r:['girls','play','garden','living'],w:['mi'],e:-10,m:12,rl:10,q:'tt',p:.3,log:'Идеальный дубль! Видео улетает в рекомендации.',f:{m:-5,log:'В кадр влетел Лео с мячом. Дубль второй…'}},
   {t:'✂️ Монтировать TikTok',r:['girls'],e:-5,m:8,log:'Наложили музыку и эффекты. Огонь!'},
-  {t:'🎨 Рисовать картину',r:['girls','yard'],e:-10,m:10,q:'art',p:.2,log:'Картина становится всё красивее.',f:{m:-10,log:'Лео пробежал мимо и опрокинул краски!'}},
+  {t:'🎨 Рисовать картину',r:['girls','garden'],e:-10,m:10,q:'art',p:.2,log:'Картина становится всё красивее.',f:{m:-10,log:'Лео пробежал мимо и опрокинул краски!'}},
   {t:'📜 Учить стихотворение',r:['girls','living'],e:-10,q:'poem',log:'«У лукоморья дуб зелёный…» Уже две строфы!'},
-  {t:'💃 Танцевать у камина',r:['living','girls'],e:-10,m:15,log:'Вы придумали новый танец под любимую песню.'},
-  {t:'🧸 Играть с Мией в куклы',r:['girls','living'],w:['mi'],e:-5,m:8,rl:12,log:'Куклы пьют чай, Мия счастлива.'},
-  {t:'🤫 Секретничать с: {n}',r:['girls','bed','yard'],w:['so','mi','an'],m:8,rl:8,log:'У вас с {n} теперь общий секрет.'}
+  {t:'💃 Танцевать у камина',r:['living','play'],e:-10,m:15,log:'Вы придумали новый танец под любимую песню.'},
+  {t:'🧸 Играть с Мией в куклы',r:['girls','play'],w:['mi'],e:-5,m:8,rl:12,log:'Куклы пьют чай, Мия счастлива.'},
+  {t:'🤫 Секретничать с: {n}',r:['girls','garden','sroom'],w:['so','mi','an'],m:8,rl:8,log:'У вас с {n} теперь общий секрет.'}
  ],
  mi:[
   {t:'🔍 Искать зайца Бусю',r:Object.keys(ROOMS),e:-5,bunny:1},
   {t:'🍬 Попросить конфетку у: {n}',r:Object.keys(ROOMS),w:'par',m:10,rl:2,q:'candy',p:.5,log:'{n} не выдерживает и даёт конфетку!',f:{m:-5,log:'{n}: «Сначала обед!»'}},
-  {t:'📱 Танцевать для TikTok с Евой',r:['girls','living','yard'],w:['ev'],e:-10,m:15,rl:10,q:'tt',p:.25,log:'Вы станцевали тренд без единой ошибки! Ева в восторге.',f:{m:-5,log:'Вы засмеялись прямо посреди танца. Ещё дубль!'}},
-  {t:'🏰 Строить шалаш из подушек',r:['living'],e:-10,m:15,log:'Шалаш из подушек огромного дивана готов! Вход только по паролю.'},
-  {t:'📺 Смотреть мультики',r:['tv','bed'],e:10,m:10,log:'Свинка Пеппа, а потом ещё серия.'},
+  {t:'📱 Танцевать для TikTok с Евой',r:['girls','play','garden','living'],w:['ev'],e:-10,m:15,rl:10,q:'tt',p:.25,log:'Вы станцевали тренд без единой ошибки! Ева в восторге.',f:{m:-5,log:'Вы засмеялись прямо посреди танца. Ещё дубль!'}},
+  {t:'🏰 Строить шалаш из подушек',r:['living','play'],e:-10,m:15,log:'Шалаш из подушек огромного дивана готов! Вход только по паролю.'},
+  {t:'📺 Смотреть мультики',r:['tv','girls'],e:10,m:10,log:'Свинка Пеппа, а потом ещё серия.'},
   {t:'🙈 Прятки с: {n}',r:Object.keys(ROOMS),w:'kid',e:-10,m:10,rl:10,log:'Вы спрятались за шторой. {n} так и не нашёл… или не нашла!'}
  ],
  leo:[
   {t:'🎮 FIFA против Тимура',r:['tv'],w:['ti'],e:-5,m:10,rl:4,q:'fifa',p:.55,log:'ПОБЕДА! Тимур в шоке!',f:{m:-8,log:'Тимур опять выиграл. Нечестно!'}},
-  {t:'⚽ Футбол в доме',r:['living','boys','hall'],e:-10,m:12,q:'goal',p:.3,log:'Гол в ворота из диванных подушек! Мрамор блестит, мяч скользит.',f:{m:-10,rel:{an:-10},log:'ДЗЫНЬ! Мамина ваза… Мама будет очень недовольна.'}},
+  {t:'⚽ Футбол в доме',r:['play','leor','hall','living'],e:-10,m:12,q:'goal',p:.3,log:'Гол в ворота из диванных подушек! Мрамор блестит, мяч скользит.',f:{m:-10,rel:{an:-10},log:'ДЗЫНЬ! Мамина ваза… Мама будет очень недовольна.'}},
   {t:'⚽ Футбол во дворе',r:['yard'],e:-15,m:10,q:'goal',log:'Мяч в девятке! Как Месси!'},
-  {t:'📚 Уроки с мамой',r:['boys','kitchen'],w:['an'],e:-15,rl:12,q:'hw',log:'Мама объяснила дроби. Оказалось, это просто!'},
+  {t:'📚 Уроки с мамой',r:['leor','study','kitchen'],w:['an'],e:-15,rl:12,q:'hw',log:'Мама объяснила дроби. Оказалось, это просто!'},
   {t:'🎮 PlayStation одному',r:['tv'],e:-5,m:10,log:'Ещё одна катка… и ещё одна.'},
   {t:'😜 Подшутить над: {n}',r:Object.keys(ROOMS),w:'kid',m:10,rl:-5,log:'Вы подложили {n} резинового паука. Визг на весь дом!'}
  ]
@@ -151,9 +152,9 @@ const A={
 const COMMON=[
  {t:'🤗 Обнять: {n}',r:Object.keys(ROOMS),w:'all',m:5,rl:7,log:'Вы крепко обняли {n}.'},
  {t:'💬 Поболтать с: {n}',r:Object.keys(ROOMS),w:'all',m:3,rl:5,log:'Вы с {n} поговорили о жизни.'},
- {t:'🥪 Перекусить',r:['kitchen'],e:15,m:5,log:'Бутерброд с сыром спасает всё.'},
- {t:'🪞 Покрасоваться перед золотым зеркалом',r:['hall'],m:6,log:'Ну красота же!'},
- {t:'😴 Вздремнуть',r:['bed','tv','girls','boys'],e:30,log:'Вы вздремнули и набрались сил.'}
+ {t:'🥪 Перекусить',r:['kitchen','dining'],e:15,m:5,log:'Бутерброд с сыром спасает всё.'},
+ {t:'🪞 Покрасоваться перед золотым зеркалом',r:['garden'],m:6,log:'Ну красота же!'},
+ {t:'😴 Вздремнуть',r:['bed','tv','girls','boys','leor','sroom'],e:30,log:'Вы вздремнули и набрались сил.'}
 ];
 const EV=[
  {e:'📞',t:'Бабушка звонит по видео и хочет увидеть всех!',c:[['Собрать всех у экрана',{m:10,e:-5,all:3}],['Сказать «привет» и убежать',{m:2}]]},
@@ -215,6 +216,32 @@ const SCENE={
  <rect x="170" y="80" width="10" height="45" fill="#7b5a3a"/><circle cx="175" cy="70" r="28" fill="#4f9a45"/><rect x="250" y="88" width="90" height="40" fill="none" stroke="#fff" stroke-width="4"/><path d="M250 88l10 10h70l10-10M260 98v30M330 98v30" stroke="#fff" opacity=".6"/>
  <rect x="200" y="122" width="34" height="10" fill="#333"/><path d="M204 132l-4 14M230 132l4 14" stroke="#333" stroke-width="2"/><path d="M207 118q3-8 0-14M217 118q3-8 0-14" stroke="#aaa" fill="none"/>`
 };
+// Комнаты по плану дома, фото которых пока нет
+SCENE.leor=SCENE.boys.replace(/<rect x="270".*?<rect x="350"[^>]*>/,"");
+SCENE.boys=`<rect width="400" height="180" fill="#5d6f7f"/><rect y="132" width="400" height="48" fill="#8a6a4c"/><path d="M0 150H400M0 165H400" stroke="#76583c"/>
+ <rect x="160" y="18" width="80" height="78" fill="#cfe0ea" stroke="#eee" stroke-width="4"/><rect x="30" y="20" width="70" height="44" fill="#1a1a1a"/><text x="65" y="47" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#e3b54f">ECONOMY</text>
+ <rect x="20" y="96" width="120" height="8" fill="#3a3a3a"/><rect x="28" y="104" width="6" height="34" fill="#3a3a3a"/><rect x="126" y="104" width="6" height="34" fill="#3a3a3a"/><rect x="50" y="76" width="44" height="20" rx="2" fill="#222"/><rect x="53" y="79" width="38" height="14" fill="#5ab0e0"/>
+ <path d="M108 92a10 10 0 0 1 20 0" stroke="#e05a5a" stroke-width="3" fill="none"/><rect x="104" y="88" width="6" height="8" rx="2" fill="#e05a5a"/><rect x="126" y="88" width="6" height="8" rx="2" fill="#e05a5a"/>
+ <rect x="260" y="104" width="130" height="34" rx="6" fill="#2b2f36"/><rect x="262" y="94" width="34" height="14" rx="4" fill="#ddd"/><rect x="300" y="28" width="70" height="46" fill="#e8e8e8"/><path d="M308 66l14-20 12 12 10-16 18 24Z" fill="#9db6c9"/>`;
+SCENE.dining=`<rect width="400" height="180" fill="#e9e3da"/><rect y="134" width="400" height="46" fill="#f4f1ec"/>${[60,250].map(x=>`<rect x="${x}" y="14" width="90" height="110" fill="#e4edf2"/><rect x="${x-6}" y="10" width="12" height="118" fill="#d2bfa3"/><rect x="${x+84}" y="10" width="12" height="118" fill="#d2bfa3"/>`).join('')}
+ ${CHAND(200,30,'#c9b98f')}<rect x="90" y="108" width="220" height="10" rx="3" fill="#6b4a2e"/><rect x="100" y="118" width="8" height="40" fill="#5a3d24"/><rect x="292" y="118" width="8" height="40" fill="#5a3d24"/>
+ ${[110,150,190,230,270].map(x=>`<rect x="${x}" y="84" width="22" height="30" rx="8" fill="#d8cbb8"/>`).join('')}<path d="M150 106h10M190 104h20M240 106h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="200" cy="100" r="5" fill="#e8743b"/>`;
+SCENE.study=`<rect width="400" height="180" fill="#4b5a52"/><rect y="134" width="400" height="46" fill="#7a5a3e"/><rect x="20" y="14" width="110" height="122" fill="#3a2c20"/>${[34,62,90,118].map(y=>`<rect x="24" y="${y}" width="102" height="3" fill="#2a1f16"/>${[0,1,2,3,4,5,6,7].map(i=>`<rect x="${28+i*12}" y="${y-18}" width="9" height="18" fill="${['#a33','#2a5d8a','#c9a35b','#3d7a4b'][i%4]}"/>`).join('')}`).join('')}
+ <rect x="170" y="20" width="80" height="80" fill="#d9e6ec" stroke="#ddd" stroke-width="4"/><rect x="150" y="104" width="200" height="10" fill="#3a2c20"/><rect x="160" y="114" width="10" height="40" fill="#3a2c20"/><rect x="330" y="114" width="10" height="40" fill="#3a2c20"/>
+ <rect x="230" y="82" width="44" height="22" rx="2" fill="#222"/><rect x="233" y="85" width="38" height="16" fill="#e9f2f7"/><circle cx="252" cy="93" r="4" fill="#e8743b"/><rect x="290" y="96" width="12" height="8" rx="2" fill="#fff"/><rect x="200" y="122" width="34" height="40" rx="8" fill="#2a2a2a"/>`;
+SCENE.garden=SCENE.hall+[[130,'#3f8a4a'],[262,'#56a35a']].map(([x,c])=>`<rect x="${x-9}" y="120" width="18" height="16" fill="#e8e1d6" stroke="#c8a45a"/><ellipse cx="${x}" cy="102" rx="13" ry="20" fill="${c}"/><path d="M${x} 120V92M${x} 104l-7-8M${x} 100l6-9" stroke="#2f6b37"/>`).join('');
+SCENE.hall=`<rect width="400" height="180" fill="#e6dfd5"/><rect y="134" width="400" height="46" fill="#d9d1c6"/><path d="M0 150H400M0 166H400M100 134V180M200 134V180M300 134V180" stroke="#cbc2b5"/>
+ <rect x="160" y="26" width="80" height="108" fill="#5b4636"/><rect x="166" y="32" width="68" height="98" fill="#6e5643"/><circle cx="226" cy="84" r="3" fill="#c8a45a"/><rect x="150" y="20" width="100" height="6" fill="#fff"/>
+ <rect x="40" y="30" width="80" height="6" fill="#3a2c20"/>${[52,72,92,112].map((x,i)=>`<path d="M${x} 36v6" stroke="#3a2c20" stroke-width="2"/><rect x="${x-9}" y="42" width="18" height="${40+(i%2)*10}" rx="5" fill="${['#2f4a6e','#b46a8a','#3a3a3a','#c9a35b'][i]}"/>`).join('')}
+ <rect x="30" y="112" width="100" height="22" fill="#cfc4b4"/>${[45,70,95,115].map((x,i)=>`<ellipse cx="${x}" cy="140" rx="9" ry="3" fill="${['#222','#e57fa0','#fff','#5a8de0'][i]}"/>`).join('')}
+ <rect x="290" y="30" width="60" height="80" rx="30" fill="#e7c87a"/><rect x="296" y="36" width="48" height="70" rx="24" fill="#dfe8ec"/><rect x="280" y="112" width="80" height="22" fill="#3a2c20"/>`;
+SCENE.sroom=`<rect width="400" height="180" fill="#ead7d0"/><path d="M0 0L60 40H340L400 0Z" fill="#dcc6be"/><rect y="132" width="400" height="48" fill="#c79a6e"/>
+ <rect x="170" y="44" width="60" height="50" fill="#e6f0f5" stroke="#fff" stroke-width="4"/><rect x="30" y="100" width="140" height="40" rx="8" fill="#f6efe9"/><rect x="30" y="80" width="20" height="60" rx="4" fill="#b98b7a"/><rect x="60" y="92" width="40" height="14" rx="6" fill="#fff"/>
+ <rect x="250" y="60" width="40" height="54" fill="#fff" stroke="#c79a6e"/><rect x="300" y="50" width="56" height="36" fill="#fff" stroke="#c79a6e"/><text x="328" y="72" font-size="9" text-anchor="middle" font-family="sans-serif" fill="#b46">Соня</text><rect x="270" y="112" width="100" height="22" fill="#a7745a"/>`;
+SCENE.play=`<rect width="400" height="180" fill="#fff4d6"/><path d="M0 0L80 50H320L400 0Z" fill="#ffe9b0"/><rect y="132" width="400" height="48" fill="#8ccbe0"/>${[0,1,2,3,4,5,6,7].map(i=>`<rect x="${i*50}" y="${132+(i%2)*24}" width="50" height="24" fill="${['#f7a1b5','#ffd36b','#9ed99a','#8ec5ff'][i%4]}" opacity=".7"/>`).join('')}
+ <rect x="30" y="70" width="70" height="64" fill="#f7a1b5"/><path d="M30 70l35-30 35 30Z" fill="#e8743b"/><rect x="55" y="100" width="20" height="34" fill="#fff"/>
+ <path d="M150 132V60H190" stroke="#3a9d5d" stroke-width="5" fill="none"/><path d="M190 60L250 132" stroke="#ffd36b" stroke-width="10"/><rect x="290" y="96" width="70" height="40" fill="none" stroke="#fff" stroke-width="4"/><circle cx="260" cy="150" r="10" fill="#fff" stroke="#222"/>
+ ${[[120,150,'#e05a5a'],[200,154,'#5a8de0'],[330,150,'#3a9d5d']].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="14" height="14" fill="${c}"/>`).join('')}`;
 // Кухня-столовая: перспектива от входа, как на фото
 SCENE.kitchen=(()=>{
  const VX=200,VY=85,ZB=.818,D=z=>z/(z+1);
@@ -323,7 +350,7 @@ function pickRoom(fav){let t=0;for(const k in fav)t+=fav[k];let x=Math.random()*
 function moveNPC(){for(const id of ALL)if(id!==S.me)S.pos[id]=id==='so'&&S.h<14?'away':pickRoom(P[id].fav)}
 function start(id){
  const so=id==='so';
- S={me:id,h:so?14:8,en:80,mo:60,room:so?'hall':({girls:'girls',boys:'boys',an:'bed',lev:'bed'}[id]||(id==='ev'||id==='mi'?'girls':'boys')),pos:{},rel:{},q:{},log:[],seen:new Set(),gifted:new Set(),bunny:rnd(Object.keys(ROOMS).filter(r=>r!=='girls'))};
+ S={me:id,h:so?14:8,en:80,mo:60,room:so?'hall':{an:'bed',lev:'bed',ti:'boys',ev:'girls',mi:'girls',leo:'leor'}[id],pos:{},rel:{},q:{},log:[],seen:new Set(),gifted:new Set(),bunny:rnd(Object.keys(ROOMS).filter(r=>r!=='girls'))};
  ALL.forEach(x=>S.rel[x]=50);moveNPC();
  S.log.unshift(so?'Суббота, 14:00. Вы приехали в гости к родным! Все бегут встречать.':'Суббота, 8:00. Дом Саджая просыпается… Говорят, в гости приедет Соня!');
  render();
@@ -384,7 +411,7 @@ function render(){
  <div class="grid">
   <div>
    <div class="card"><h2>🏠 Дом Саджая <small style="color:var(--mute);font-weight:400">— нажмите на комнату, чтобы перейти</small></h2>
-   ${[1,2].map(f=>`<div class="fl">${f===1?'1 этаж':'2 этаж'}</div><div class="house">${Object.entries(ROOMS).filter(r=>r[1][2]===f).map(([k,[i,n]])=>`<div class="room ${k===S.room?'here':''}" onclick="go('${k}')"><div class="rn">${i} ${n}</div><div class="ppl">${k===S.room?me.e:''}${ppl(k).map(x=>P[x].e).join('')}</div></div>`).join('')}</div>`).join('')}</div>
+   ${[1,2,3].map(f=>`<div class="fl">${f} этаж</div><div class="house">${Object.entries(ROOMS).filter(r=>r[1][2]===f).map(([k,[i,n]])=>`<div class="room ${k===S.room?'here':''}" onclick="go('${k}')"><div class="rn">${i} ${n}</div><div class="ppl">${k===S.room?me.e:''}${ppl(k).map(x=>P[x].e).join('')}</div></div>`).join('')}</div>`).join('')}</div>
    <div class="scene sec"><svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMid slice">${SCENE[S.room]}</svg><div class="actors">${[me.e+'<sup>вы</sup>',...here.map(x=>P[x].e)].map(e=>`<span>${e}</span>`).join('')}</div></div>
    <div class="card sec"><h2>${ROOMS[S.room][0]} ${ROOMS[S.room][1]}${here.length?': '+here.map(x=>P[x].n).join(', '):' (никого)'}</h2>
    ${S.say&&here.includes(S.say[0])?`<div class="say">${P[S.say[0]].e} <b>${P[S.say[0]].n}:</b> «${S.say[1]}»</div>`:''}
@@ -419,7 +446,7 @@ function end(){
  if(S.q.goal>=5)lines.push('Лео забил 5 голов. Ваза… об этом лучше не говорить.');
  if(!lines.length)lines.push('Все устали, но довольны. Дома тепло и шумно.');
  $('#app').innerHTML=`<div class="card end pop" style="max-width:620px;margin:20px auto;text-align:center">
- <div style="font-size:54px">🍽️</div><h2 style="font-size:24px">21:00 — семейный ужин</h2>
+ <div style="font-size:54px">🍽️</div><h2 style="font-size:24px">21:00 — семейный ужин в столовой</h2>
  <p>Вся семья Саджая собралась за большим столом: ${ALL.map(x=>P[x].e).join(' ')}</p>
  ${lines.map(l=>`<p>• ${l}</p>`).join('')}
  <p style="margin-top:16px">${me.e} <b>${me.n}</b>: квестов выполнено ${d} из ${qs.length}, ближе всех сегодня ${P[best].e} ${P[best].n}</p>
